@@ -520,21 +520,6 @@ pre code {
   text-align: center;
 }
 
-.app-video {
-  aspect-ratio: 16 / 10;
-  background: #111;
-  border: 1px solid #242424;
-  min-height: 180px;
-  overflow: hidden;
-}
-
-.app-video video {
-  display: block;
-  height: 100%;
-  object-fit: contain;
-  width: 100%;
-}
-
 .code-explainer {
   display: grid;
   gap: 14px;
