@@ -35,21 +35,22 @@
   </div>
 
   <article class="tab-panel active" id="app-audioviz" role="tabpanel">
-    <p class="repo-meta">Oscillo / JUCE 8 / C++20 / audio visualization</p>
-    <h3>Audioviz</h3>
-    <div class="feature-layout">
+    <div class="feature-layout media-centered">
       <div>
+        <p class="repo-meta">Audioviz / JUCE 8 / C++20 / audio visualization</p>
+        <h3>Audioviz</h3>
         <p>
-          Audioviz is the oscilloscope and spectrum-analysis work from Oscillo:
-          a real-time audio plugin and standalone app. The core waveform view
-          uses a lock-aware circular buffer so the audio thread can keep writing
-          samples while the UI takes coherent snapshots for drawing.
+          Audioviz is a real-time audio visualization plugin and standalone app
+          focused on making waveforms, levels, and frequency content readable at
+          musical speed. It combines oscilloscope-style waveform display,
+          spectrum analysis, trigger controls, metering, zoom, and time-window
+          navigation in a compact audio tool.
         </p>
         <p>
-          For interface images, the cleanest route is to run the standalone app,
-          capture the waveform and spectrum modes with macOS screenshots, then
-          crop them into <code>assets/apps/audioviz-waveform.png</code> and
-          <code>assets/apps/audioviz-spectrum.png</code>.
+          The core challenge is keeping the audio thread safe while the UI
+          remains fluid. Incoming samples are written into real-time friendly
+          history buffers, then copied into stable snapshots for drawing so the
+          visual layer can stay responsive without blocking audio processing.
         </p>
       </div>
       <div class="video-embed">
@@ -260,10 +261,10 @@ float value = clamp(
       <h4>Conception</h4>
       <h5>Environment and Tooling</h5>
       <p>
-        Built as a JUCE synthesizer plugin in C++20 with CMake 3.22, matching
-        the same modern project skeleton as Oscillo. The project uses a JUCE
-        submodule, generated build information, optional ccache, and a tested
-        CMake build.
+        Built as a JUCE synthesizer plugin in C++20 with CMake 3.22, using the
+        same modern JUCE/CMake structure as the recent audio projects. The
+        project uses a JUCE submodule, generated build information, optional
+        ccache, and a tested CMake build.
       </p>
       <ul>
         <li>Language: C++20, with compiler extensions disabled.</li>
