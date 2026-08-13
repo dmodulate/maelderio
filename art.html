@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Art - Maël Derio</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<nav>
+  <h1><a href="index.html">Maël Derio</a></h1>
+  <div>
+    <a href="index.html">Home</a>
+    <a href="apps.html">Apps</a>
+    <a href="training.html">Training</a>
+    <a href="art.html">Art</a>
+    <a href="music.html">Music</a>
+    <a href="cv.html">CV</a>
+    <a href="blog.html">Blog</a>
+  </div>
+</nav>
+
+<main>
+<section class="portfolio-section" id="art" aria-label="Art">
+  <div class="section-heading">
+    <p class="eyebrow">Creative systems</p>
+    <h2>Art</h2>
+  </div>
+
+  <div class="tabs" role="tablist" aria-label="Processing projects">
+    <button class="tab active" type="button" role="tab" aria-selected="true" aria-controls="art-invert" data-tab="art-invert">InvertUnderstanding</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="art-load-save" data-tab="art-load-save">Load And Save Params</button>
+  </div>
+
+  <article class="tab-panel active" id="art-invert" role="tabpanel">
+    <h3>InvertUnderstanding</h3>
+    <p>A Processing sketch from the UnderstandCircles project group, with image and data folders. This belongs to the visual-research side of the portfolio: parameterized systems, geometric exploration, and interactive visual composition.</p>
+    <div class="media-placeholder"><span>Processing artwork still</span></div>
+  </article>
+
+  <article class="tab-panel" id="art-load-save" role="tabpanel" hidden>
+    <h3>UnderstandCirclesLoadAndSaveParams</h3>
+    <p>A companion Processing sketch focused on preserving parameter states. This is useful for turning live visual exploration into repeatable compositions.</p>
+    <div class="media-placeholder"><span>Parameter study image</span></div>
+  </article>
+</section>
+</main>
+
+<script>
+  document.querySelectorAll(".tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+      const tabsContainer = tab.closest(".tabs");
+      const section = tab.closest(".portfolio-section");
+      const selectedPanel = document.getElementById(tab.dataset.tab);
+
+      tabsContainer.querySelectorAll(".tab").forEach(item => {
+        item.classList.remove("active");
+        item.setAttribute("aria-selected", "false");
+      });
+
+      section.querySelectorAll(".tab-panel").forEach(panel => {
+        panel.classList.remove("active");
+        panel.hidden = true;
+      });
+
+      tab.classList.add("active");
+      tab.setAttribute("aria-selected", "true");
+      selectedPanel.classList.add("active");
+      selectedPanel.hidden = false;
+    });
+  });
+</script>
+
+</body>
+</html>

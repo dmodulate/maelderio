@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Training - Maël Derio</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<nav>
+  <h1><a href="index.html">Maël Derio</a></h1>
+  <div>
+    <a href="index.html">Home</a>
+    <a href="apps.html">Apps</a>
+    <a href="training.html">Training</a>
+    <a href="art.html">Art</a>
+    <a href="music.html">Music</a>
+    <a href="cv.html">CV</a>
+    <a href="blog.html">Blog</a>
+  </div>
+</nav>
+
+<main>
+<section class="portfolio-section" id="training" aria-label="Training">
+  <div class="section-heading">
+    <p class="eyebrow">Courses</p>
+    <h2>Training</h2>
+  </div>
+
+  <div class="tabs compact-tabs" role="tablist" aria-label="Training courses">
+    <button class="tab active" type="button" role="tab" aria-selected="true" aria-controls="course-cpp14" data-tab="course-cpp14">C++14-17</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="course-cpp-advanced" data-tab="course-cpp-advanced">C++ Advanced</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="course-cpp-beginner" data-tab="course-cpp-beginner">C++ Debutant</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="course-cpp-research" data-tab="course-cpp-research">C++ Research</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="course-cmake" data-tab="course-cmake">CMake</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="course-cuda-linux" data-tab="course-cuda-linux">CUDA</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="course-patterns" data-tab="course-patterns">Design Patterns</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="course-tableau" data-tab="course-tableau">Tableau R Python</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="course-matlab-dl" data-tab="course-matlab-dl">MATLAB Deep Learning</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="course-simulink" data-tab="course-simulink">MATLAB Simulink</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="course-python" data-tab="course-python">Python</button>
+  </div>
+
+  <article class="tab-panel training-panel active" id="course-cpp14" role="tabpanel">
+    <h3>C++14-17</h3>
+    <section class="course-block"><h4>Summary</h4><p>A modern C++ course focused on the transition from C++14 to C++17: move semantics, lambdas, multithreading, constexpr, structured bindings, template features, and standard library additions.</p></section>
+    <section class="course-block"><h4>Course Structure</h4><div class="course-outline"><section><h5>C++14 and C++17 Language Features</h5><ul><li>Move semantics summary</li><li>Generalized lambdas</li><li>Multithreading and the memory model</li><li>Constexpr, digit separators, and variable templates</li><li>Type deduction for functions</li><li>Heterogeneous lookup and tuple addressing by type</li><li>std::make_unique</li></ul></section><section><h5>C++17 Core Additions</h5><ul><li>Structured bindings</li><li>If and switch with initialization</li><li>Inline variables</li><li>Aggregate extensions</li><li>Copy elision</li><li>Attributes and other language features</li></ul></section><section><h5>Template Features</h5><ul><li>Class template argument deduction</li><li>Compile-time if</li><li>Fold expressions</li><li>Auto template parameters</li><li>Using declarations and aliases</li></ul></section><section><h5>Standard Library and Exercises</h5><ul><li>std::optional, std::variant, std::any, and std::byte</li><li>std::string_view and filesystem</li><li>Type traits extensions and parallel STL algorithms</li><li>size, empty, data, polymorphic memory resources, char conversions, and alignment</li><li>Exercise set mapped to the main feature lessons</li></ul></section></div></section>
+    <section class="course-block"><h4>Course Snippet</h4><div class="lesson-preview"><h5>Code/C++14-17/C++17TemplateFeatures/20_FoldExpressions.md</h5><p>Fold expressions collapse parameter packs with an operator. They are one of the cleanest C++17 additions for variadic templates.</p><p class="equation">(... + values) = v1 + v2 + ... + vn</p><div class="code-toolbar"><button class="copy-code" type="button">Copy</button></div><pre><code><span class="kw">template</span>&lt;<span class="kw">typename</span>... Args&gt;
+<span class="kw">auto</span> sum(Args... args)
+{
+    <span class="kw">return</span> (... + args);
+}</code></pre></div></section>
+  </article>
+
+  <article class="tab-panel training-panel" id="course-cpp-advanced" role="tabpanel" hidden>
+    <h3>C++ Advanced</h3>
+    <section class="course-block"><h4>Summary</h4><p>An advanced C++ course for developers who already know the basics and need deeper language mechanics: value categories, type deduction, smart pointers, lambdas, concurrency, variadic templates, linkage, and type traits.</p></section>
+    <section class="course-block"><h4>Course Structure</h4><div class="course-outline"><section><h5>Setup and Foundations</h5><ul><li>Install and CMake-based hello world</li><li>Course content, books, and links</li><li>From C++98 to C++11</li><li>Introduction to lvalues and rvalues</li><li>Type deduction</li></ul></section><section><h5>Initialization and Language Features</h5><ul><li>Class member initialization</li><li>Uniform initialization</li><li>Range-based for loops</li><li>default, delete, explicit, noexcept, override, and final</li><li>Delegating constructors, mutable, constexpr, aliases, nullptr, scoped enum, and syntax cleanup</li></ul></section><section><h5>Library and Ownership</h5><ul><li>std::array, pair, tuple, and new algorithms</li><li>forward_list and unordered containers</li><li>Memory overview</li><li>Smart pointers</li><li>Move semantics and forwarding</li></ul></section><section><h5>Advanced Topics and Exercises</h5><ul><li>Lambdas and std::function</li><li>Threads and concurrency</li><li>Variadic templates</li><li>Translation units, global symbols, extern, static, and namespaces</li><li>Type traits and exercise files from exercise1 through global exercises</li></ul></section></div></section>
+    <section class="course-block"><h4>Course Snippet</h4><div class="lesson-preview"><h5>Code/C++Advanced/12_VariadicTemplates/variadicTemplates.md</h5><p>Variadic templates are a strong advanced-C++ lesson because they connect type packs, recursion, fold-style thinking, and generic APIs.</p><p class="equation">template&lt;typename... Args&gt; = a function or type over a pack</p><div class="code-toolbar"><button class="copy-code" type="button">Copy</button></div><pre><code><span class="kw">auto</span> texture = std::make_unique&lt;Texture&gt;(<span class="str">"scope.png"</span>);
+renderer.setTexture(std::move(texture));
+
+std::shared_ptr&lt;Node&gt; node = std::make_shared&lt;Node&gt;();</code></pre></div></section>
+  </article>
+
+  <article class="tab-panel training-panel" id="course-cpp-beginner" role="tabpanel" hidden>
+    <h3>C++ Debutant</h3>
+    <section class="course-block"><h4>Summary</h4><p>A beginner C++ track that moves from syntax and control flow toward functions, headers, arrays, vectors, files, pointers, OOP, inheritance, templates, exceptions, and STL basics.</p></section>
+    <section class="course-block"><h4>Course Structure</h4><div class="course-outline"><section><h5>Language Basics</h5><ul><li>Introduction</li><li>Variables</li><li>Basics and basic operations</li><li>Control structures 1 and 2</li><li>Functions 1 and 2</li><li>Separate source and header files</li></ul></section><section><h5>Data and Memory</h5><ul><li>Arrays</li><li>Dynamic arrays and vectors</li><li>Files and streams</li><li>Pointers and references</li></ul></section><section><h5>Object-Oriented Programming</h5><ul><li>OOP 1 and OOP 2</li><li>Constructors</li><li>Composition with Character and Weapon classes</li><li>Operator overloads</li><li>Deep copy</li><li>Inheritance</li><li>Virtual functions and polymorphism</li><li>Object collections with polymorphism</li><li>Static members and friendship</li></ul></section><section><h5>Language Extensions and STL</h5><ul><li>Exceptions</li><li>Templates</li><li>Typedefs, namespaces, and enum</li><li>Standard library</li><li>STL containers</li><li>Iterators and functors</li><li>Algorithms</li><li>Exercise folders for the early lessons</li></ul></section></div></section>
+    <section class="course-block"><h4>Course Snippet</h4><div class="lesson-preview"><h5>Code/C++Debutant/21_OOP_8_Virtual_Polymorphism/main.cpp</h5><p>This code-first lesson demonstrates runtime polymorphism: a base-class pointer can call the derived implementation when methods are virtual.</p><p class="equation">Base* p = new Derived; p->virtualMethod();</p><div class="code-toolbar"><button class="copy-code" type="button">Copy</button></div><pre><code><span class="kw">class</span> Vehicle {
+<span class="kw">public</span>:
+    <span class="kw">virtual</span> <span class="kw">void</span> move() = 0;
+};
+
+<span class="kw">class</span> Car : <span class="kw">public</span> Vehicle {
+    <span class="kw">void</span> move() <span class="kw">override</span> { std::cout &lt;&lt; <span class="str">"drive"</span>; }
+};</code></pre></div></section>
+  </article>
+
+  <article class="tab-panel training-panel" id="course-cpp-research" role="tabpanel" hidden>
+    <h3>C++ Research</h3>
+    <section class="course-block"><h4>Summary</h4><p>A research and preparation archive for modern C++ topics: C++20/C++23 features, design architecture, metaprogramming, optimization, and concurrency.</p></section>
+    <section class="course-block"><h4>Course Structure</h4><div class="course-outline"><section><h5>C++20 and C++23</h5><ul><li>What is new in C++20</li><li>Concepts and abbreviated function templates</li><li>atomic_ref and atomic shared pointers</li><li>consteval, coroutines, and designated initializers</li><li>format, jthread, latch/barrier, modules, ranges/views, span, stop source, syncstream, and the spaceship operator</li><li>Major C++23 changes</li></ul></section><section><h5>Design Architecture</h5><ul><li>KISS and related principles</li><li>SOLID</li><li>Inline static</li><li>PIMPL</li><li>Separation of concerns</li><li>Type erasure</li></ul></section><section><h5>Metaprogramming</h5><ul><li>NRVO and RVO</li><li>SFINAE and concepts</li><li>Template specialization</li><li>Template versus constexpr</li><li>decltype(auto) template deduction</li><li>Evolution of metaprogramming</li><li>Reference collapsing and variadic template folds</li></ul></section><section><h5>Optimization and Concurrency</h5><ul><li>Allocation, memory management, memory pools, and containers optimization</li><li>Branch prediction, loop unrolling, compiler flags, and compiler optimization</li><li>Copy elision, pointer aliasing, pragmas, vectorization, and SIMD</li><li>Race conditions, thread pools, queues, coroutines, jthread, latches, barriers, and stop sources</li></ul></section></div></section>
+    <section class="course-block"><h4>Course Snippet</h4><div class="lesson-preview"><h5>Code/C++Research/C++20/concepts.md</h5><p>Concepts make template requirements explicit. They improve diagnostics and turn informal template assumptions into named constraints.</p><p class="equation">Concept<T> = compile-time predicate over T</p><div class="code-toolbar"><button class="copy-code" type="button">Copy</button></div><pre><code><span class="kw">template</span>&lt;<span class="kw">typename</span> T&gt;
+<span class="kw">concept</span> Number = std::integral&lt;T&gt; || std::floating_point&lt;T&gt;;
+
+<span class="kw">template</span>&lt;Number T&gt;
+T square(T value) { <span class="kw">return</span> value * value; }</code></pre></div></section>
+  </article>
+
+  <article class="tab-panel training-panel" id="course-cmake" role="tabpanel" hidden>
+    <h3>CMake</h3>
+    <section class="course-block"><h4>Summary</h4><p>A practical CMake course built as a sequence of project folders, each introducing one build-system concept through source code.</p></section>
+    <section class="course-block"><h4>Course Structure</h4><div class="course-outline"><section><h5>Project Basics</h5><ul><li>Lesson 1: Hello CMake</li><li>Lesson 2: Add C++14 support</li><li>Lesson 3: Add a version number</li><li>Lesson 4: Add multiple files</li><li>Lesson 5: Add libraries</li><li>Lesson 6: Add subdirectories</li></ul></section><section><h5>Targets and Configuration</h5><ul><li>Lesson 7: Optional libraries</li><li>Lesson 8: Usage requirements</li><li>Lesson 8 exercise 2</li><li>Lesson 9: Generator expressions</li><li>Lesson 10: Install rules</li><li>Lesson 11: Tests</li></ul></section><section><h5>Automation and Packaging</h5><ul><li>Lesson 12: Add introspection</li><li>Lesson 13: Dashboard</li><li>Lesson 14: Custom commands</li><li>Lesson 15: Packaging</li><li>Lesson 16: Static or shared builds</li></ul></section><section><h5>Reusable Packages</h5><ul><li>Lesson 17: Export targets</li><li>Lesson 17 component export</li><li>Lesson 18: Debug and release</li><li>Lesson 19: Find things</li><li>Lesson 19 component find packages</li><li>Lesson 20: GoogleTest</li><li>Lesson 21: RPath</li></ul></section></div></section>
+    <section class="course-block"><h4>Course Snippet</h4><div class="lesson-preview"><h5>Code/CMakeCourse/Lesson17Export/source/CMakeLists.txt</h5><p>Export lessons are central because they turn a local CMake target into a reusable package with installable target metadata.</p><p class="equation">target -> install -> export -> find_package</p><div class="code-toolbar"><button class="copy-code" type="button">Copy</button></div><pre><code><span class="fn">install</span>(TARGETS MathFunctions
+    EXPORT MathFunctionsTargets
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib)
+
+<span class="fn">install</span>(EXPORT MathFunctionsTargets
+    NAMESPACE Tutorial::
+    DESTINATION lib/cmake/MathFunctions)</code></pre></div></section>
+  </article>
+
+  <article class="tab-panel training-panel" id="course-cuda-linux" role="tabpanel" hidden>
+    <h3>CUDA</h3>
+    <section class="course-block"><h4>Summary</h4><p>A CUDA course focused on GPU programming practice: runtime API, memory management, kernels, libraries, streams, synchronization, debugging, profiling, and performance optimization.</p></section>
+    <section class="course-block"><h4>Course Structure</h4><div class="course-outline"><section><h5>Introduction and First Programs</h5><ul><li>What CUDA is</li><li>CUDA versus OpenCL and SYCL</li><li>Windows and Linux development environment setup</li><li>CUDA features and architecture overview</li><li>Compilation and execution</li><li>NVCC explanation</li></ul></section><section><h5>Runtime API and Language</h5><ul><li>Host-side CUDA API role</li><li>Device capability information</li><li>Synchronization</li><li>Memory allocation</li><li>Textures and surfaces</li><li>Error handling</li><li>Qualifiers, vector types, math types, memory barriers, atomics, and warp functions</li></ul></section><section><h5>Libraries and Synchronization</h5><ul><li>CUDA libraries overview</li><li>cuBLAS, cuFFT, cuRAND, and cuSPARSE</li><li>Cooperative groups</li><li>Asynchronous barriers</li><li>Concurrent asynchronous execution with streams and events</li><li>Dynamic parallelism</li></ul></section><section><h5>Debugging, Optimization, and Exercises</h5><ul><li>Common errors, debugging tools, and profiling</li><li>Global performance optimization strategy</li><li>Resource utilization, memory throughput, instruction throughput, and memory thrashing</li><li>OpenMP and OpenACC chapters</li><li>Exercise sets for runtime API, memory, textures/surfaces, libraries, streams/events, and optimization</li></ul></section></div></section>
+    <section class="course-block"><h4>Course Snippet</h4><div class="lesson-preview"><h5>Code/CUDA-Linux/9_OptimisationPerformance.md/3_MaximiserLeDebitDinstructions.md</h5><p>Instruction throughput complements memory optimization: the lesson focuses on keeping GPU execution units busy with efficient operations.</p><p class="equation">throughput = useful instructions / elapsed time</p><div class="code-toolbar"><button class="copy-code" type="button">Copy</button></div><pre><code><span class="kw">__global__</span> <span class="kw">void</span> saxpy(<span class="kw">float</span> a, <span class="kw">float</span>* x, <span class="kw">float</span>* y)
+{
+    <span class="kw">int</span> i = blockIdx.x * blockDim.x + threadIdx.x;
+    y[i] = a * x[i] + y[i];
+}</code></pre></div></section>
+  </article>
+
+  <article class="tab-panel training-panel" id="course-patterns" role="tabpanel" hidden>
+    <h3>Design Patterns</h3>
+    <section class="course-block"><h4>Summary</h4><p>A software design course organized around creational, structural, behavioral, and idiomatic patterns, with exercises for each family.</p></section>
+    <section class="course-block"><h4>Course Structure</h4><div class="course-outline"><section><h5>Creational Patterns</h5><ul><li>Creational design patterns overview</li><li>Singleton</li><li>Factory Method</li><li>Abstract Factory</li><li>Builder</li><li>Prototype</li></ul></section><section><h5>Structural Patterns</h5><ul><li>Structural patterns overview</li><li>Adapter</li><li>Bridge</li><li>Composite</li><li>Decorator</li><li>Facade</li><li>Flyweight</li><li>Proxy</li></ul></section><section><h5>Behavioral Patterns</h5><ul><li>Behavioral patterns overview</li><li>Chain of Responsibility</li><li>Command, Iterator, Mediator, and Memento</li><li>Observer and State</li><li>Strategy</li><li>Template Method</li><li>Visitor and Interpreter</li></ul></section><section><h5>Practice Material</h5><ul><li>Exercises for object factories, abstract factory, builder, and prototype</li><li>Exercises for adapter, bridge, composite, decorator, facade, flyweight, and proxy</li><li>Exercises for command, iterator, mediator, observer, state, strategy, template method, and visitor</li><li>Other patterns and idioms</li></ul></section></div></section>
+    <section class="course-block"><h4>Course Snippet</h4><div class="lesson-preview"><h5>Code/DesignPatterns/Behavioral Paterns/9_StrategyPattern.md</h5><p>The Strategy pattern replaces conditional behavior with interchangeable objects that share an interface.</p><p class="equation">Context + Strategy interface + concrete strategies</p><div class="code-toolbar"><button class="copy-code" type="button">Copy</button></div><pre><code><span class="kw">struct</span> CompressionStrategy {
+    <span class="kw">virtual</span> <span class="kw">void</span> compress(File&amp;) = 0;
+};
+
+<span class="kw">class</span> Context {
+    std::unique_ptr&lt;CompressionStrategy&gt; strategy;
+};</code></pre></div></section>
+  </article>
+
+  <article class="tab-panel training-panel" id="course-tableau" role="tabpanel" hidden>
+    <h3>Tableau R Python</h3>
+    <section class="course-block"><h4>Summary</h4><p>A data analytics course combining Python fundamentals, R exercises, Tableau exercises, exploratory data analysis, wrangling, normalization, regression, and model evaluation.</p></section>
+    <section class="course-block"><h4>Course Structure</h4><div class="course-outline"><section><h5>Python Fundamentals</h5><ul><li>Lesson 1 introduction</li><li>Strings, lists, and control structures</li><li>Functions and data structures</li><li>Modules, package distribution, and the stock package example</li><li>Formatting, regular expressions, files, and exceptions</li><li>Decorators, OOP, inheritance, dunder methods, iterators, generators, databases, doctests, and unittest</li></ul></section><section><h5>Python Data Work</h5><ul><li>Basic data analysis</li><li>Cleaning and wrangling</li><li>Exploratory data analysis</li><li>Market data examples</li><li>Missing values and normalization</li><li>Regression analysis and model evaluation</li></ul></section><section><h5>R and SQL</h5><ul><li>R installation and fundamentals</li><li>Data types, vectors, lists, matrices, tables, and data frames</li><li>Functions, loops, factors, plotting, and statistics</li><li>RSQL, pandas SQL, and Python SQL examples</li></ul></section><section><h5>Tableau and After-Course Exercises</h5><ul><li>Tableau workbook exercises</li><li>Tableau and R integration</li><li>Python after-course exercises</li><li>R after-course exercises</li><li>Tableau after-course exercises</li></ul></section></div></section>
+    <section class="course-block"><h4>Course Snippet</h4><div class="lesson-preview"><h5>Code/FormationTableauRPython/Python/Fondamentaux/Lesson7Modules/packaging_tutorial/README.md</h5><p>The packaging README is the Markdown-based course file present in this folder; it introduces reusable package documentation.</p><p class="equation">package = metadata + source layout + documentation</p><div class="code-toolbar"><button class="copy-code" type="button">Copy</button></div><pre><code><span class="kw">from</span> sklearn.linear_model <span class="kw">import</span> LinearRegression
+
+model = LinearRegression()
+model.fit(X_train, y_train)
+predictions = model.predict(X_test)</code></pre></div></section>
+  </article>
+
+  <article class="tab-panel training-panel" id="course-matlab-dl" role="tabpanel" hidden>
+    <h3>MATLAB Deep Learning</h3>
+    <section class="course-block"><h4>Summary</h4><p>A MATLAB deep learning course covering definitions, machine learning foundations, neural-network operation, classification, regression, generalization, CNNs, datastores, pretrained models, and architectures.</p></section>
+    <section class="course-block"><h4>Course Structure</h4><div class="course-outline"><section><h5>Introduction</h5><ul><li>Definitions</li><li>History</li><li>Machine learning</li><li>Deep learning</li></ul></section><section><h5>Neural Network Foundations</h5><ul><li>First example</li><li>How neural networks work</li><li>Binary classification</li><li>Multiclass classification</li><li>Regression</li><li>Generalization</li></ul></section><section><h5>Convolutional Networks</h5><ul><li>CNNs</li><li>Datastores</li><li>Pretrained models</li><li>Architectures</li><li>Cats example script</li></ul></section><section><h5>Exercises and Trainer Notes</h5><ul><li>Deep learning foundations exercise</li><li>Classification and regression exercise</li><li>Generalization exercise</li><li>CNN exercise</li><li>Admin notes on split/shuffle, gradients, Reuters import, metrics, cats and dogs, and multi-GPU</li></ul></section></div></section>
+    <section class="course-block"><h4>Course Snippet</h4><div class="lesson-preview"><h5>Code/MatlabDeepLearning/0_Exercices/5_Ex_CNN/1_Ex_CNN.md</h5><p>The CNN exercise shows how the convolution lesson becomes a hands-on classification workflow.</p><p class="equation">feature map = activation(input * kernel + bias)</p><div class="code-toolbar"><button class="copy-code" type="button">Copy</button></div><pre><code>layers = [
+    imageInputLayer([28 28 1])
+    convolution2dLayer(3, 16, <span class="str">'Padding'</span>, <span class="str">'same'</span>)
+    reluLayer
+    maxPooling2dLayer(2, <span class="str">'Stride'</span>, 2)
+    fullyConnectedLayer(10)
+    softmaxLayer];</code></pre></div></section>
+  </article>
+
+  <article class="tab-panel training-panel" id="course-simulink" role="tabpanel" hidden>
+    <h3>MATLAB Simulink</h3>
+    <section class="course-block"><h4>Summary</h4><p>A telecommunications-oriented MATLAB/Simulink/Stateflow course covering waveform generation, channels, encoding, fading, equalization, spread spectrum, OFDM, Stateflow, and MAC-layer examples.</p></section>
+    <section class="course-block"><h4>Course Structure</h4><div class="course-outline"><section><h5>Simulink and Communication Basics</h5><ul><li>Introduction</li><li>Simulink tutorial</li><li>Solver and tolerance</li><li>Waveform generation</li><li>AWGN channel</li><li>Encoding introduction, Hamming, and convolutional code</li></ul></section><section><h5>Channel and Receiver Topics</h5><ul><li>Randomizers, puncturers, and interleavers</li><li>Fading, power delay profile, and MIMO</li><li>Free-space path loss and periodic blocking channels</li><li>Equalization, linear equalization, decision-feedback equalizer, and MLSE equalizer</li></ul></section><section><h5>Advanced Communication Systems</h5><ul><li>Spread spectrum systems</li><li>Direct sequence spread spectrum</li><li>Gold codes, Walsh codes, and time-hopping spread systems</li><li>OFDM and OFDM equalization</li><li>Helicopter satellite example</li><li>Stateflow and getting started with Stateflow</li><li>MAC layer, OSI, complete example, dataframe generator, and ACK generator</li></ul></section><section><h5>Exercises and Admin Notes</h5><ul><li>Waveform generation, AWGN, encoding, fading, free-space, equalization, spread spectrum, OFDM, and MAC-layer exercises</li><li>Course plan and alternative course plan</li><li>Bit error rate, complex-number recap, equalization, BER OFDM, Rayleigh, Viterbi, despreading QPSK, sampling time, and delay compensation notes</li></ul></section></div></section>
+    <section class="course-block"><h4>Course Snippet</h4><div class="lesson-preview"><h5>Code/MatlabSimulinkComm/0_Exercices/12_Ex_OFDM/1_Ex_OFDM.md</h5><p>The OFDM exercise turns the communication theory into a concrete Simulink implementation task.</p><p class="equation">x[n] = Σ X[k]e^{j2πkn/N}</p><div class="code-toolbar"><button class="copy-code" type="button">Copy</button></div><pre><code>N = 64;
+symbols = qammod(data, 16);
+timeDomain = ifft(symbols, N);
+cyclicPrefix = timeDomain(end - cpLen + 1:end);</code></pre></div></section>
+  </article>
+
+  <article class="tab-panel training-panel" id="course-python" role="tabpanel" hidden>
+    <h3>Python</h3>
+    <section class="course-block"><h4>Summary</h4><p>A Python course progressing from fundamentals to modules, packaging, formatting, files, exceptions, decorators, OOP, iterators/generators, databases, doctests, and unit tests.</p></section>
+    <section class="course-block"><h4>Course Structure</h4><div class="course-outline"><section><h5>Core Python</h5><ul><li>Lesson 1 introduction</li><li>Lesson 2 strings</li><li>Lesson 3 lists</li><li>Lesson 4 control structures</li><li>Lesson 5 functions</li><li>Lesson 6 data structures</li></ul></section><section><h5>Modules, Files, and Exceptions</h5><ul><li>Lesson 7 modules</li><li>Distributing code and packaging tutorial</li><li>Stock package example with screen and management subpackages</li><li>Lesson 8 formatting and regular expressions</li><li>Lesson 9 files</li><li>Lesson 10 exceptions and program example</li></ul></section><section><h5>Object-Oriented and Iteration</h5><ul><li>Lesson 11 decorators</li><li>Lesson 12 object-oriented programming</li><li>Lesson 13 polymorphism and inheritance</li><li>Lesson 14 dunder methods</li><li>Lesson 15 iterators and generators</li></ul></section><section><h5>Data Access and Testing</h5><ul><li>Lesson 16 SQL</li><li>NoSQL MongoDB</li><li>SQLAlchemy and full ORM example</li><li>Doctests with calculations, vowels, factorial, failures, and printed output</li><li>Unittest suites and source-file tests</li><li>Exercise files from exLesson1 through exLesson15</li></ul></section></div></section>
+    <section class="course-block"><h4>Course Snippet</h4><div class="lesson-preview"><h5>Code/Python/Lesson7Modules/packaging_tutorial/README.md</h5><p>The packaging lesson moves from scripts to reusable modules and installable packages.</p><p class="equation">package = metadata + source layout + build backend</p><div class="code-toolbar"><button class="copy-code" type="button">Copy</button></div><pre><code>[build-system]
+requires = [<span class="str">"hatchling"</span>]
+build-backend = <span class="str">"hatchling.build"</span>
+
+[project]
+name = <span class="str">"example-package-maeld"</span></code></pre></div></section>
+  </article>
+</section>
+</main>
+
+<script src="js/training-snippets.js"></script>
+<script>
+  document.querySelectorAll(".tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+      const tabsContainer = tab.closest(".tabs");
+      const section = tab.closest(".portfolio-section");
+      const selectedPanel = document.getElementById(tab.dataset.tab);
+
+      tabsContainer.querySelectorAll(".tab").forEach(item => {
+        item.classList.remove("active");
+        item.setAttribute("aria-selected", "false");
+      });
+
+      section.querySelectorAll(".tab-panel").forEach(panel => {
+        panel.classList.remove("active");
+        panel.hidden = true;
+      });
+
+      tab.classList.add("active");
+      tab.setAttribute("aria-selected", "true");
+      selectedPanel.classList.add("active");
+      selectedPanel.hidden = false;
+    });
+  });
+
+  const escapeHtml = value => value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+
+  const inlineMarkdown = value => escapeHtml(value)
+    .replace(/`([^`]+)`/g, "<code>$1</code>")
+    .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+
+  const languageFromPath = path => {
+    if (path.endsWith(".cpp") || path.endsWith(".h") || path.endsWith(".cxx")) return "cpp";
+    if (path.endsWith("CMakeLists.txt") || path.endsWith(".cmake")) return "cmake";
+    if (path.endsWith(".py")) return "python";
+    if (path.endsWith(".m")) return "matlab";
+    return "text";
+  };
+
+  const highlightCode = code => {
+    const keywords = new Set([
+      "auto", "break", "case", "class", "concept", "const", "constexpr", "double", "else", "export",
+      "float", "for", "if", "import", "install", "int", "namespace", "private", "project", "public",
+      "return", "set", "static", "struct", "template", "typename", "using", "virtual", "void", "while",
+      "function", "end", "from", "def", "requires", "target_link_libraries", "add_executable"
+    ]);
+    const types = new Set(["std", "string", "vector", "unique_ptr", "shared_ptr", "size_t", "bool"]);
+    const tokenPattern = /(\/\/.*|#.*|%.*|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\b\d+(?:\.\d+)?\b|\b[A-Za-z_]\w*(?=\s*\()|\b[A-Za-z_]\w*\b)/g;
+    let cursor = 0;
+    let output = "";
+    let match;
+
+    while ((match = tokenPattern.exec(code)) !== null) {
+      output += escapeHtml(code.slice(cursor, match.index));
+      const token = match[0];
+      let className = "";
+
+      if (/^(\/\/|#|%)/.test(token)) className = "token-comment";
+      else if (/^["']/.test(token)) className = "token-string";
+      else if (/^\d/.test(token)) className = "token-number";
+      else if (keywords.has(token)) className = "token-keyword";
+      else if (types.has(token) || /^[A-Z]\w+$/.test(token)) className = "token-type";
+      else if (code.slice(tokenPattern.lastIndex).trimStart().startsWith("(")) className = "token-function";
+
+      output += className ? `<span class="${className}">${escapeHtml(token)}</span>` : escapeHtml(token);
+      cursor = tokenPattern.lastIndex;
+    }
+
+    return output + escapeHtml(code.slice(cursor));
+  };
+
+  const copyIcon = `
+    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+      <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+    </svg>
+  `;
+  const checkIcon = `
+    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 6 9 17l-5-5"></path>
+    </svg>
+  `;
+
+  const codeBlock = (code, language) => `
+    <div class="code-sample">
+      <div class="code-toolbar">
+        <button class="copy-code" type="button" aria-label="Copy code" title="Copy code">${copyIcon}</button>
+      </div>
+      <pre><code class="language-${language}">${highlightCode(code)}</code></pre>
+    </div>
+  `;
+
+  const renderMarkdown = markdown => {
+    const lines = markdown.split(/\r?\n/);
+    const html = [];
+    let paragraph = [];
+    let list = [];
+    let inCode = false;
+    let codeLanguage = "text";
+    let codeLines = [];
+
+    const flushParagraph = () => {
+      if (!paragraph.length) return;
+      html.push(`<p>${inlineMarkdown(paragraph.join(" "))}</p>`);
+      paragraph = [];
+    };
+
+    const flushList = () => {
+      if (!list.length) return;
+      html.push(`<ul>${list.map(item => `<li>${inlineMarkdown(item)}</li>`).join("")}</ul>`);
+      list = [];
+    };
+
+    lines.forEach(line => {
+      const fence = line.match(/^```(\w+)?/);
+      if (fence) {
+        if (inCode) {
+          html.push(codeBlock(codeLines.join("\n"), codeLanguage));
+          codeLines = [];
+          inCode = false;
+        } else {
+          flushParagraph();
+          flushList();
+          codeLanguage = fence[1] || "text";
+          inCode = true;
+        }
+        return;
+      }
+
+      if (inCode) {
+        codeLines.push(line);
+        return;
+      }
+
+      if (!line.trim()) {
+        flushParagraph();
+        flushList();
+        return;
+      }
+
+      const heading = line.match(/^(#{1,4})\s+(.+)/);
+      if (heading) {
+        flushParagraph();
+        flushList();
+        html.push(`<h${heading[1].length}>${inlineMarkdown(heading[2])}</h${heading[1].length}>`);
+        return;
+      }
+
+      if (/^-{3,}$/.test(line.trim())) {
+        flushParagraph();
+        flushList();
+        html.push("<hr>");
+        return;
+      }
+
+      const bullet = line.match(/^\s*[-*]\s+(.+)/);
+      if (bullet) {
+        flushParagraph();
+        list.push(bullet[1]);
+        return;
+      }
+
+      if (line.startsWith(">")) {
+        flushParagraph();
+        flushList();
+        html.push(`<blockquote>${inlineMarkdown(line.replace(/^>\s?/, ""))}</blockquote>`);
+        return;
+      }
+
+      paragraph.push(line);
+    });
+
+    if (inCode) html.push(codeBlock(codeLines.join("\n"), codeLanguage));
+    flushParagraph();
+    flushList();
+    return html.join("");
+  };
+
+  const attachCopyButtons = root => {
+    root.querySelectorAll(".copy-code").forEach(button => {
+      button.addEventListener("click", () => {
+        const code = button.closest(".code-sample").querySelector("code").innerText;
+        navigator.clipboard.writeText(code).then(() => {
+          button.innerHTML = checkIcon;
+          button.setAttribute("aria-label", "Copied");
+          button.setAttribute("title", "Copied");
+          setTimeout(() => {
+            button.innerHTML = copyIcon;
+            button.setAttribute("aria-label", "Copy code");
+            button.setAttribute("title", "Copy code");
+          }, 1200);
+        });
+      });
+    });
+  };
+
+  document.querySelectorAll(".lesson-preview").forEach(preview => {
+    const path = preview.querySelector("h5").innerText.trim();
+    const viewer = document.createElement("div");
+    viewer.className = "markdown-viewer";
+    preview.querySelectorAll("p, .code-toolbar, pre").forEach(node => node.remove());
+    preview.appendChild(viewer);
+
+    try {
+      const text = window.trainingSnippets[path];
+      if (!text) throw new Error("course file missing from local data");
+      const isMarkdown = path.endsWith(".md");
+      viewer.innerHTML = isMarkdown
+        ? renderMarkdown(text)
+        : codeBlock(text, languageFromPath(path));
+      attachCopyButtons(viewer);
+    } catch (error) {
+      viewer.innerHTML = `<p class="loading-text">Unable to load the full course file for local preview: ${escapeHtml(error.message)}.</p>`;
+    }
+  });
+</script>
+
+</body>
+</html>

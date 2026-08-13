@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Apps - Maël Derio</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<nav>
+  <h1><a href="index.html">Maël Derio</a></h1>
+  <div>
+    <a href="index.html">Home</a>
+    <a href="apps.html">Apps</a>
+    <a href="training.html">Training</a>
+    <a href="art.html">Art</a>
+    <a href="music.html">Music</a>
+    <a href="cv.html">CV</a>
+    <a href="blog.html">Blog</a>
+  </div>
+</nav>
+
+<main>
+<section class="portfolio-section" id="apps" aria-label="Apps">
+  <div class="section-heading">
+    <p class="eyebrow">Work</p>
+    <h2>Apps</h2>
+  </div>
+
+  <div class="tabs" role="tablist" aria-label="Apps">
+    <button class="tab active" type="button" role="tab" aria-selected="true" aria-controls="app-audioviz" data-tab="app-audioviz">Audioviz</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="app-music-visualizer" data-tab="app-music-visualizer">Music Visualizer</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="app-303" data-tab="app-303">303 Synth</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="app-klide" data-tab="app-klide">Klide</button>
+  </div>
+
+  <article class="tab-panel active" id="app-audioviz" role="tabpanel">
+    <p class="repo-meta">Oscillo / JUCE 8 / C++20 / audio visualization</p>
+    <h3>Audioviz</h3>
+    <div class="feature-layout">
+      <div>
+        <p>
+          Audioviz is the oscilloscope and spectrum-analysis work from Oscillo:
+          a real-time audio plugin and standalone app. The core waveform view
+          uses a lock-aware circular buffer so the audio thread can keep writing
+          samples while the UI takes coherent snapshots for drawing.
+        </p>
+        <p>
+          For interface images, the cleanest route is to run the standalone app,
+          capture the waveform and spectrum modes with macOS screenshots, then
+          crop them into <code>assets/apps/audioviz-waveform.png</code> and
+          <code>assets/apps/audioviz-spectrum.png</code>.
+        </p>
+      </div>
+      <div class="app-video">
+        <video controls preload="metadata">
+          <source src="mov/Audioviz%20-%202026-08-13%2016-32-55.mov" type="video/quicktime">
+          Your browser does not support embedded video playback.
+        </video>
+      </div>
+    </div>
+    <section class="app-detail">
+      <h4>Conception</h4>
+      <h5>Environment and Tooling</h5>
+      <p>
+        Built as a modern JUCE audio project in C++20, using CMake 3.22 and a
+        JUCE submodule. The CMake project defines versioned build information,
+        shared sources for plugin and standalone targets, optional ccache, and
+        test discovery through CTest.
+      </p>
+      <ul>
+        <li>Language: C++20, with extensions disabled.</li>
+        <li>Frameworks: JUCE audio, GUI, DSP, events, and standalone/plugin wrappers.</li>
+        <li>Build: CMake release build with generated JUCE headers and shared source lists.</li>
+        <li>Targets: standalone app plus plugin formats such as VST3 and AU.</li>
+        <li>CI: GitHub Actions on macOS, with submodules, ccache, clang-format checks, CMake build, and CTest.</li>
+      </ul>
+    </section>
+    <div class="code-explainer">
+      <h4>Code snippet</h4>
+      <pre><code>void ScopeWaveformHistory::pushSamples(
+    const juce::AudioBuffer&lt;float&gt;&amp; buffer,
+    int numInputChannels)
+{
+    readWriteStatus.fetch_add(1, std::memory_order_acq_rel);
+    auto writePosition = scopeWritePosition.load(std::memory_order_relaxed);
+
+    for (auto sample = 0; sample &lt; buffer.getNumSamples(); ++sample)
+    {
+        for (auto channel = 0; channel &lt; channelsToStore; ++channel)
+        {
+            const auto storageIndex = channel * scopeSize + writePosition;
+            scopeSamples[storageIndex].store(
+                buffer.getSample(channel, sample),
+                std::memory_order_relaxed);
+        }
+
+        writePosition = (writePosition + 1) % scopeSize;
+    }
+
+    scopeWritePosition.store(writePosition, std::memory_order_release);
+    readWriteStatus.fetch_add(1, std::memory_order_release);
+}</code></pre>
+      <p>
+        The samples are stored in per-channel rings. The UI checks the
+        read/write status before and after copying; if the audio thread writes
+        during the copy, the UI discards that snapshot and tries again.
+      </p>
+    </div>
+    <section class="architecture">
+      <h4>Architecture</h4>
+      <p>
+        The application is organized around a strict separation between the
+        real-time audio path, analysis state, rendering, and interaction code:
+        <code>audio input -> PluginProcessor -> ScopeData/SpectrumData -> UI renderers</code>.
+        This keeps the audio callback predictable while letting the interface
+        repaint at its own rhythm.
+      </p>
+      <ul>
+        <li><code>Source/Audio</code>: owns the processor, waveform history, trigger logic, meters, and spectrum analysis. These classes isolate sample capture and analysis from drawing code.</li>
+        <li><code>ScopeWaveformHistory</code>: stores incoming samples in per-channel circular buffers so the UI can copy stable snapshots without blocking the audio thread.</li>
+        <li><code>ScopeData</code> and <code>SpectrumData</code>: expose prepared data for the waveform and frequency views, which keeps renderers simple and avoids recomputing expensive values in paint calls.</li>
+        <li><code>Source/State</code>: centralizes parameter/state handling so processor and UI agree on time windows, trigger mode, spectrum settings, and display choices.</li>
+        <li><code>Source/UI/Renderers</code>: contains focused drawing components for waveform, grid, clipping, spectrum, meters, and titles; each renderer has one visual responsibility.</li>
+        <li><code>Source/UI/Interaction</code>: isolates drag, wheel, and zoom behavior from rendering so input logic can evolve without touching DSP or drawing internals.</li>
+        <li><code>Source/UI/Panels</code> and controls: compose the toolbar and parameter panels from smaller controls, making the editor layout easier to maintain.</li>
+      </ul>
+      <p>
+        Short time windows keep precise raw sample history for trigger-aligned
+        oscilloscope drawing. Longer time windows use min/max overview storage
+        so broad waveform shape can be drawn efficiently without scanning every
+        stored sample on each repaint.
+      </p>
+    </section>
+  </article>
+
+  <article class="tab-panel" id="app-music-visualizer" role="tabpanel" hidden>
+    <p class="repo-meta">audiovisual / Python / ModernGL / GLSL</p>
+    <h3>Music Visualizer</h3>
+    <div class="feature-layout">
+      <div>
+        <p>
+          Music Visualizer is a real-time audio-reactive visual engine. Python
+          extracts deterministic audio features from live input, maps them to
+          visual parameters, then sends those parameters to GLSL shaders.
+        </p>
+        <p>
+          Good images here would be stills from the particle and fluid shader
+          presets, plus a short screen recording exported as a poster frame.
+        </p>
+      </div>
+      <div class="media-placeholder">
+        <span>Shader still image</span>
+      </div>
+    </div>
+    <section class="app-detail">
+      <h4>Conception</h4>
+      <h5>Environment and Tooling</h5>
+      <p>
+        Built as a Python audio-visual engine with a Conda environment and a
+        typed/linted package layout. Python handles live audio capture, feature
+        extraction, mapping, and orchestration, while ModernGL and GLSL handle
+        the real-time visual output.
+      </p>
+      <ul>
+        <li>Language: Python 3.14.6, with Ruff targeting Python 3.14 and mypy checking <code>src</code> and <code>tests</code>.</li>
+        <li>Frameworks and libraries: NumPy, SciPy, sounddevice, ModernGL, GLFW, GLSL shaders.</li>
+        <li>Build/environment: Conda environment in <code>environment.yml</code> plus <code>pyproject.toml</code> tooling configuration.</li>
+        <li>Testing and quality: pytest tests, Ruff format/lint, and strict mypy options.</li>
+        <li>CI: GitHub Actions on macOS running Conda setup, Ruff format check, Ruff lint, mypy, and pytest.</li>
+      </ul>
+    </section>
+    <div class="split-code">
+      <div class="code-explainer">
+        <h4>Code snippet</h4>
+        <pre><code>def compute_kick(signal, sample_rate):
+    split = signal.size // 2
+    previous_bass = compute_frequency_bands(
+        signal[:split], sample_rate)["bass"]
+    current_bass = compute_frequency_bands(
+        signal[split:], sample_rate)["bass"]
+
+    growth = max(0.0, current_bass - previous_bass)
+    kick = current_bass * 0.65 + growth * 0.35
+    return float(np.clip(kick, 0.0, 1.0))</code></pre>
+        <p>
+          This feature estimates a kick by combining current bass energy with
+          low-frequency growth between the first and second half of the audio
+          window.
+        </p>
+      </div>
+      <div class="code-explainer">
+        <h4>Code snippet</h4>
+        <pre><code>float kick = clamp(u_kick, 0.0, 1.0);
+float body_radius = 0.28 + bass_body * 0.34;
+float shell = 1.0 - smoothstep(
+    0.018, 0.12, abs(radius - burst_radius));
+
+float value = clamp(
+    body * 0.30
+    + shell * (kick * 0.35 + flash * 0.18)
+    + burst
+    + afterglow,
+    0.0, 1.0);</code></pre>
+        <p>
+          The shader turns audio features into visible structure: bass inflates
+          the body, kick expands a shell, highs add detail, and flash brightens
+          the transient.
+        </p>
+      </div>
+    </div>
+    <section class="architecture">
+      <h4>Architecture</h4>
+      <p>
+        The project is organized as a pipeline:
+        <code>Live Audio -> Audio Engine -> Feature Extraction -> Feature Mapping -> Visual Parameters -> ModernGL Renderer -> GLSL Shaders -> Display</code>.
+        Each step has a narrow responsibility, which makes the visual behavior
+        easier to tune without rewriting capture or rendering code.
+      </p>
+      <ul>
+        <li><code>src</code>: contains the Python runtime for audio input, signal analysis, visual parameter mapping, and renderer orchestration.</li>
+        <li><code>config</code>: keeps tunable values outside the code so mapping constants, visual presets, and runtime settings can change without editing the engine.</li>
+        <li><code>shaders</code>: stores GLSL programs. The renderer sends normalized audio features as uniforms, and the shader turns those values into motion, color, and shape.</li>
+        <li><code>docs</code>: documents the pipeline and design notes so the project remains understandable as experiments accumulate.</li>
+        <li><code>tests</code>: protects deterministic feature extraction and mapping behavior, which is important because visual quality depends on stable signal interpretation.</li>
+      </ul>
+      <p>
+        The deterministic mapping layer is deliberately separate from rendering:
+        it can later be replaced by a learned or preset-based mapper while the
+        shader interface stays stable.
+      </p>
+    </section>
+  </article>
+
+  <article class="tab-panel" id="app-303" role="tabpanel" hidden>
+    <p class="repo-meta">Zavalishin / JUCE 8 / C++20 / acid synthesizer</p>
+    <h3>303 Synth</h3>
+    <div class="feature-layout">
+      <div>
+        <p>
+          A 303 emulation is not just a saw oscillator through a generic low-pass
+          filter. The signature comes from the interaction of slide/accent
+          behavior, a bright saw/square oscillator, envelope-shaped cutoff, and
+          the resonant diode-ladder low-pass filter.
+        </p>
+        <p>
+          This project models the filter as a topology-preserving transform
+          diode ladder. Resonance is solved inside the same sample with Newton
+          iterations, avoiding an extra feedback delay and keeping the resonant
+          peak closer to the intended cutoff.
+        </p>
+      </div>
+      <div class="media-placeholder">
+        <span>303 synth interface image</span>
+      </div>
+    </div>
+    <section class="app-detail">
+      <h4>Conception</h4>
+      <h5>Environment and Tooling</h5>
+      <p>
+        Built as a JUCE synthesizer plugin in C++20 with CMake 3.22, matching
+        the same modern project skeleton as Oscillo. The project uses a JUCE
+        submodule, generated build information, optional ccache, and a tested
+        CMake build.
+      </p>
+      <ul>
+        <li>Language: C++20, with compiler extensions disabled.</li>
+        <li>Frameworks: JUCE audio utilities, audio devices, DSP, events, GUI extra, and plugin wrappers.</li>
+        <li>Build: CMake release configuration with generated JUCE headers and shared sources for plugin and standalone targets.</li>
+        <li>Targets: standalone app plus plugin formats such as VST3 and AU.</li>
+        <li>CI: GitHub Actions on macOS, with submodules, ccache, clang-format checks, CMake build, and CTest.</li>
+      </ul>
+    </section>
+    <div class="code-explainer">
+      <h4>Code snippet</h4>
+      <pre><code>float u4Estimate = s4;
+
+for (auto iteration = 0; iteration &lt; 4; ++iteration)
+{
+    const float drive = compensatedInput - k * u4Estimate;
+    const float saturated = std::tanh(drive);
+    const float f = a4 * saturated
+        + statesContribution - u4Estimate;
+    const float fDerivative =
+        a4 * (-k * (1.0f - saturated * saturated)) - 1.0f;
+    u4Estimate -= f / fDerivative;
+}</code></pre>
+      <p>
+        The filter is specific because the resonance feedback is implicit:
+        the current sample's output depends on itself. Solving that loop gives
+        the nonlinear diode saturation and resonance their 303-like bite.
+      </p>
+    </div>
+    <section class="architecture">
+      <h4>Architecture</h4>
+      <p>
+        The project keeps the synthesizer engine, parameters, and UI panels in
+        separate layers:
+        <code>parameters -> PluginProcessor -> oscillator/filter DSP -> PluginEditor panels</code>.
+        That makes it easier to reason about audio behavior independently from
+        the knobs that control it.
+      </p>
+      <ul>
+        <li><code>Source/Audio/PluginProcessor.cpp</code>: owns the audio callback, MIDI/audio processing flow, parameter reads, and the connection between DSP components.</li>
+        <li><code>Source/State/ZavalishinParameters.cpp</code>: centralizes plugin parameters so the editor and processor share one typed parameter model.</li>
+        <li>Oscillator DSP: generates the acid-style saw/square source, with anti-aliasing concerns separated from filter behavior.</li>
+        <li>Filter DSP: models the nonlinear topology-preserving diode ladder. Solving the feedback path inside the sample is what preserves the resonant, saturated 303 character.</li>
+        <li><code>Source/UI/Panels</code>: splits oscillator and filter controls into dedicated panels so each sound block has a matching visual control group.</li>
+        <li><code>Source/UI/Controls</code> and LookAndFeel: provide reusable labeled knobs, toggles, and visual style, keeping the editor code from becoming a pile of widget setup.</li>
+        <li><code>Source/Standalone</code>: provides a standalone wrapper while sharing the same audio engine and editor as plugin formats.</li>
+      </ul>
+      <p>
+        The architecture favors small DSP units and a thin processor because
+        303 emulation depends on subtle interactions between oscillator level,
+        cutoff modulation, resonance, and saturation.
+      </p>
+    </section>
+  </article>
+
+  <article class="tab-panel" id="app-klide" role="tabpanel" hidden>
+    <p class="repo-meta">Klide / JUCE 7 / C++17 / older project</p>
+    <h3>Klide</h3>
+    <div class="feature-layout">
+      <div>
+        <p>
+          Klide is an older Euclidean rhythm drum-machine VST3. It can run four
+          sample sequences and distribute pulses across a fixed number of steps
+          with the Bjorklund algorithm. It is a meaningful early project, but it
+          needs refactoring: clearer naming, modern JUCE/CMake structure, tests,
+          and separation between sequencing, audio, and UI state.
+        </p>
+      </div>
+      <div class="media-placeholder">
+        <span>Klide interface image</span>
+      </div>
+    </div>
+    <section class="app-detail">
+      <h4>Conception</h4>
+      <h5>Environment and Tooling</h5>
+      <p>
+        Klide is an older JUCE project created with Projucer rather than the
+        newer CMake/JUCE layout used by the later apps. It is useful as a
+        historical project, but its build and organization need modernization.
+      </p>
+      <ul>
+        <li>Language: C++17-era JUCE code.</li>
+        <li>Frameworks: JUCE plugin framework, with a <code>Klide.jucer</code> Projucer project file.</li>
+        <li>Build: generated from Projucer rather than a checked-in CMake pipeline.</li>
+        <li>Targets: VST3 drum-machine plugin workflow.</li>
+        <li>CI: no GitHub Actions workflow found in the repository.</li>
+        <li>Refactor target: migrate to CMake/JUCE, add tests, and separate sequencer, sampler, DSP, state, and editor code.</li>
+      </ul>
+    </section>
+    <div class="code-explainer">
+      <h4>Code snippet</h4>
+      <pre><code>do {
+    count_[level] = divisor / remainder_[level];
+    remainder_[level + 1] = divisor % remainder_[level];
+    divisor = remainder_[level];
+    level = level + 1;
+} while (remainder_[level] &gt; 1);
+
+count_[level] = divisor;
+build_string(level, reverse);</code></pre>
+      <p>
+        Bjorklund's algorithm repeatedly divides rests by pulses to create the
+        most even distribution possible. For example, 5 pulses over 16 steps
+        becomes a rhythm where the gaps are balanced rather than clustered.
+      </p>
+    </div>
+    <section class="architecture">
+      <h4>Architecture</h4>
+      <p>
+        Klide combines several responsibilities that should now be separated:
+        <code>Euclidean sequence generation -> sample triggering -> voice/playback state -> plugin parameters -> editor controls</code>.
+        The current structure works as a compact early plugin, but the refactor
+        goal is to give each part a clear boundary.
+      </p>
+      <ul>
+        <li>Sequencer generation: the Bjorklund algorithm builds evenly distributed rhythms from pulses and steps. This should become a pure, tested module with no UI dependency.</li>
+        <li>Timing and triggering: converts generated patterns into sample triggers synchronized to the plugin timeline.</li>
+        <li>Sampler/playback layer: loads and plays drum samples, ideally separated from sequencing so the same rhythm engine can drive other sound sources.</li>
+        <li>Envelope and filter controls: shape each sample voice; these should live with DSP/voice state rather than editor widgets.</li>
+        <li>Plugin state: stores parameters and pattern settings for host automation and preset recall.</li>
+        <li>Editor: should become a view/controller over the sequencer and sampler state, including drag-and-drop sample loading and per-track controls.</li>
+      </ul>
+      <p>
+        The reason to refactor is not cosmetic: Euclidean rhythm generation is a
+        valuable core idea, and isolating it would make the app testable,
+        easier to extend, and easier to port to the modern JUCE/CMake structure.
+      </p>
+    </section>
+  </article>
+</section>
+</main>
+
+<script>
+  document.querySelectorAll(".tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+      const tabsContainer = tab.closest(".tabs");
+      const section = tab.closest(".portfolio-section");
+      const selectedPanel = document.getElementById(tab.dataset.tab);
+
+      tabsContainer.querySelectorAll(".tab").forEach(item => {
+        item.classList.remove("active");
+        item.setAttribute("aria-selected", "false");
+      });
+
+      section.querySelectorAll(".tab-panel").forEach(panel => {
+        panel.classList.remove("active");
+        panel.hidden = true;
+      });
+
+      tab.classList.add("active");
+      tab.setAttribute("aria-selected", "true");
+      selectedPanel.classList.add("active");
+      selectedPanel.hidden = false;
+    });
+  });
+
+  const copyIcon = `
+    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+      <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+    </svg>
+  `;
+  const checkIcon = `
+    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 6 9 17l-5-5"></path>
+    </svg>
+  `;
+
+  const escapeHtml = value => value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+
+  const highlightCode = code => {
+    const keywords = new Set([
+      "auto", "break", "case", "class", "concept", "const", "constexpr", "double", "else", "export",
+      "float", "for", "if", "import", "install", "int", "namespace", "private", "project", "public",
+      "return", "set", "static", "struct", "template", "typename", "using", "virtual", "void", "while",
+      "function", "end", "from", "def", "requires", "target_link_libraries", "add_executable"
+    ]);
+    const types = new Set(["std", "string", "vector", "unique_ptr", "shared_ptr", "size_t", "bool"]);
+    const tokenPattern = /(\/\/.*|#.*|%.*|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\b\d+(?:\.\d+)?\b|\b[A-Za-z_]\w*(?=\s*\()|\b[A-Za-z_]\w*\b)/g;
+    let cursor = 0;
+    let output = "";
+    let match;
+
+    while ((match = tokenPattern.exec(code)) !== null) {
+      output += escapeHtml(code.slice(cursor, match.index));
+      const token = match[0];
+      let className = "";
+
+      if (/^(\/\/|#|%)/.test(token)) className = "token-comment";
+      else if (/^["']/.test(token)) className = "token-string";
+      else if (/^\d/.test(token)) className = "token-number";
+      else if (keywords.has(token)) className = "token-keyword";
+      else if (types.has(token) || /^[A-Z]\w+$/.test(token)) className = "token-type";
+      else if (code.slice(tokenPattern.lastIndex).trimStart().startsWith("(")) className = "token-function";
+
+      output += className ? `<span class="${className}">${escapeHtml(token)}</span>` : escapeHtml(token);
+      cursor = tokenPattern.lastIndex;
+    }
+
+    return output + escapeHtml(code.slice(cursor));
+  };
+
+  document.querySelectorAll(".code-explainer pre").forEach(pre => {
+    const codeElement = pre.querySelector("code");
+    const originalCode = codeElement.innerText;
+    codeElement.innerHTML = highlightCode(originalCode);
+
+    const wrapper = document.createElement("div");
+    wrapper.className = "code-sample";
+    const toolbar = document.createElement("div");
+    toolbar.className = "code-toolbar";
+    const button = document.createElement("button");
+    button.className = "copy-code";
+    button.type = "button";
+    button.setAttribute("aria-label", "Copy code");
+    button.setAttribute("title", "Copy code");
+    button.innerHTML = copyIcon;
+
+    toolbar.appendChild(button);
+    pre.parentNode.insertBefore(wrapper, pre);
+    wrapper.appendChild(toolbar);
+    wrapper.appendChild(pre);
+
+    button.addEventListener("click", () => {
+      navigator.clipboard.writeText(originalCode).then(() => {
+        button.innerHTML = checkIcon;
+        button.setAttribute("aria-label", "Copied");
+        button.setAttribute("title", "Copied");
+        setTimeout(() => {
+          button.innerHTML = copyIcon;
+          button.setAttribute("aria-label", "Copy code");
+          button.setAttribute("title", "Copy code");
+        }, 1200);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
