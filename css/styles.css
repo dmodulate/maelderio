@@ -22,20 +22,85 @@ a {
   padding: 80px 20px;
 }
 
-.projects {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+.repo-browser,
+.blog,
+.about {
   padding: 20px;
-  gap: 20px;
 }
 
-.card {
+.repo-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.tab {
+  color: #eaeaea;
+  background: #111;
+  border: 1px solid #262626;
+  border-radius: 6px;
+  cursor: pointer;
+  font: inherit;
+  padding: 10px 12px;
+}
+
+.tab:hover,
+.tab.active {
+  background: #eaeaea;
+  color: #0a0a0a;
+}
+
+.repo-panel {
   border: 1px solid #222;
-  padding: 20px;
+  padding: 24px;
 }
 
-.blog {
-  padding: 20px;
+.repo-panel h3 {
+  font-size: 32px;
+  margin: 0 0 12px;
+}
+
+.repo-panel p {
+  line-height: 1.6;
+  max-width: 900px;
+}
+
+.repo-panel a {
+  display: inline-block;
+  margin: 10px 0 0;
+}
+
+.repo-meta {
+  color: #999;
+  font-size: 14px;
+  margin: 0 0 10px;
+}
+
+.subprojects {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  margin: 24px 0;
+}
+
+.subprojects section {
+  border: 1px solid #222;
+  padding: 16px;
+}
+
+.subprojects h4 {
+  margin: 0 0 8px;
+}
+
+.subprojects p {
+  color: #cfcfcf;
+  font-size: 14px;
+  margin: 0;
+}
+
+code {
+  color: #fff;
 }
 
 #posts li {

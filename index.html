@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Your Name — Portfolio</title>
+  <title>Your Name - Portfolio</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -21,27 +21,226 @@
   <p>Generative visuals, sound, and systems.</p>
 </section>
 
-<section class="projects">
-
-  <div class="card">
-    <h3>Generative Field System</h3>
-    <p>Particle-based attractor simulation (Processing)</p>
-    <a href="#">View project</a>
+<section class="repo-browser" aria-label="Repository portfolio">
+  <div class="repo-tabs" role="tablist" aria-label="Repositories">
+    <button class="tab active" type="button" role="tab" aria-selected="true" aria-controls="repo-zavalishin" data-tab="repo-zavalishin">Zavalishin</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="repo-oscillo" data-tab="repo-oscillo">Oscillo</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="repo-juce-lib" data-tab="repo-juce-lib">dmodul8JuceLib</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="repo-audiovisual" data-tab="repo-audiovisual">audiovisual</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="repo-formation" data-tab="repo-formation">Formation</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="repo-processing" data-tab="repo-processing">processing</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="repo-klide" data-tab="repo-klide">Klide</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="repo-maelderio" data-tab="repo-maelderio">maelderio</button>
   </div>
 
-  <div class="card">
-    <h3>Audio Reactive Engine</h3>
-    <p>Frequency-modulated visual system</p>
-    <a href="#">View project</a>
-  </div>
+  <article class="repo-panel active" id="repo-zavalishin" role="tabpanel">
+    <p class="repo-meta">Private repo / C++ / JUCE 8 / C++20</p>
+    <h3>Zavalishin</h3>
+    <p>
+      A JUCE audio plugin and standalone app project set up with CMake, tests,
+      build metadata, VST3 output, AU output, and optional local plugin copying.
+      The repo is structured as a modern plugin codebase with shared processor
+      and editor code across standalone and plugin formats.
+    </p>
+    <a href="https://github.com/dmodulate/Zavalishin">View repository</a>
+  </article>
 
-  <div class="card">
-    <h3>AI system</h3>
-    <p>Prayer generator</p>
-    <a href="#">View project</a>
-  </div>
+  <article class="repo-panel" id="repo-oscillo" role="tabpanel" hidden>
+    <p class="repo-meta">Private repo / C++ / JUCE 8 / C++20</p>
+    <h3>Oscillo</h3>
+    <p>
+      A live oscilloscope plugin and standalone app. It includes waveform
+      display, RMS and peak metering, input-device handling in standalone mode,
+      DAW-controlled routing in plugin mode, release documentation, and unit
+      tests around the audio visualization logic.
+    </p>
+    <a href="https://github.com/dmodulate/Oscillo">View repository</a>
+  </article>
 
+  <article class="repo-panel" id="repo-juce-lib" role="tabpanel" hidden>
+    <p class="repo-meta">Private repo / C++ / reusable JUCE library</p>
+    <h3>dmodul8JuceLib</h3>
+    <p>
+      A personal shared JUCE library extracted from plugin work. It collects
+      reusable audio visualization pieces such as scope data, meters, waveform
+      history, trigger detection, FFT spectrum data, renderers, zoom controls,
+      and popup controls. It is designed to be added as a submodule and compiled
+      selectively by consuming plugin projects.
+    </p>
+    <a href="https://github.com/dmodulate/dmodul8JuceLib">View repository</a>
+  </article>
+
+  <article class="repo-panel" id="repo-audiovisual" role="tabpanel" hidden>
+    <p class="repo-meta">Private repo / Python / ModernGL / GLSL</p>
+    <h3>audiovisual</h3>
+    <p>
+      A real-time generative visual engine driven by live audio. It captures
+      audio, extracts features like RMS, FFT magnitude, spectral centroid,
+      frequency bands, onset, and kick-like transients, then maps them to shader
+      parameters for ModernGL visuals. The project also includes text and
+      Tkinter preview renderers, configs, docs, tests, linting, typing, and CI.
+    </p>
+    <a href="https://github.com/dmodulate/audiovisual">View repository</a>
+  </article>
+
+  <article class="repo-panel" id="repo-formation" role="tabpanel" hidden>
+    <p class="repo-meta">Private repo / C++ / Python / CUDA / MATLAB / course material</p>
+    <h3>Formation</h3>
+    <p>
+      A code-focused training archive. I skipped the document folders and broke
+      out the visible folders under <code>Code/</code> as individual sections.
+    </p>
+
+    <div class="subprojects">
+      <section>
+        <h4>C++14-17</h4>
+        <p>C++ course material with lessons, exercises, links, VS Code setup, libraries, templates, and modern C++17 features.</p>
+      </section>
+      <section>
+        <h4>C++14-17ForParticipants</h4>
+        <p>Participant-facing version of the C++14/C++17 training material, likely prepared as a cleaner course handout track.</p>
+      </section>
+      <section>
+        <h4>C++Advanced</h4>
+        <p>Advanced C++ training material for deeper language, architecture, and implementation topics beyond the introductory course.</p>
+      </section>
+      <section>
+        <h4>C++Debutant</h4>
+        <p>Beginner C++ course content for foundational syntax, control flow, data structures, and programming exercises.</p>
+      </section>
+      <section>
+        <h4>C++Research</h4>
+        <p>Experimental or exploratory C++ material used to test concepts before they become course-ready examples.</p>
+      </section>
+      <section>
+        <h4>CMakeCourse</h4>
+        <p>Training examples around CMake project structure, builds, targets, and modern C/C++ build workflows.</p>
+      </section>
+      <section>
+        <h4>CUDA-Linux</h4>
+        <p>CUDA examples and exercises aimed at Linux-based GPU development workflows.</p>
+      </section>
+      <section>
+        <h4>CUDA</h4>
+        <p>General CUDA training code for parallel programming and GPU computation examples.</p>
+      </section>
+      <section>
+        <h4>DeepLearning</h4>
+        <p>Deep learning course code and exercises, likely combining Python workflows with model-building examples.</p>
+      </section>
+      <section>
+        <h4>DesignPatterns</h4>
+        <p>Code examples for software design patterns and object-oriented architecture exercises.</p>
+      </section>
+      <section>
+        <h4>DesignPatternsForParticipants</h4>
+        <p>Participant-facing design-pattern material prepared for exercises, workshops, or guided lessons.</p>
+      </section>
+      <section>
+        <h4>EdgeAI</h4>
+        <p>Training material for edge AI workflows, combining embedded or local deployment concerns with machine-learning code.</p>
+      </section>
+      <section>
+        <h4>FormationTableauRPython</h4>
+        <p>Data-oriented training material around Tableau, R, and Python workflows.</p>
+      </section>
+      <section>
+        <h4>MatlabDeepLearning</h4>
+        <p>MATLAB examples for deep learning concepts, tooling, and practical model experiments.</p>
+      </section>
+      <section>
+        <h4>MatlabSimulinkComm</h4>
+        <p>MATLAB and Simulink communication examples, likely focused on modeling and signal/system workflows.</p>
+      </section>
+      <section>
+        <h4>Python</h4>
+        <p>Python lessons covering strings, lists, control flow, functions, data structures, modules, formatting, files, exceptions, decorators, OOP, iterators, databases, doctests, and unit tests.</p>
+      </section>
+      <section>
+        <h4>SecureCoding</h4>
+        <p>Secure coding training material focused on writing safer software and recognizing implementation risks.</p>
+      </section>
+      <section>
+        <h4>VSCodeWorkspaces</h4>
+        <p>Workspace setups and editor configuration examples for course or project development environments.</p>
+      </section>
+    </div>
+
+    <a href="https://github.com/dmodulate/Formation">View repository</a>
+  </article>
+
+  <article class="repo-panel" id="repo-processing" role="tabpanel" hidden>
+    <p class="repo-meta">Private repo / Processing</p>
+    <h3>processing</h3>
+    <p>
+      A Processing sketch repository. The visible project group is
+      <code>UnderstandCircles</code>, with sketches, data folders, images, and
+      Processing sketch settings.
+    </p>
+
+    <div class="subprojects">
+      <section>
+        <h4>InvertUnderstanding</h4>
+        <p>A Processing sketch under <code>UnderstandCircles</code> with its own <code>.pde</code> source, data folder, images, and sketch properties.</p>
+      </section>
+      <section>
+        <h4>UnderstandCirclesLoadAndSaveParams</h4>
+        <p>A companion Processing sketch focused on the same circle-understanding visual system, with added project structure for loading and saving parameters.</p>
+      </section>
+    </div>
+
+    <a href="https://github.com/dmodulate/processing">View repository</a>
+  </article>
+
+  <article class="repo-panel" id="repo-klide" role="tabpanel" hidden>
+    <p class="repo-meta">Public repo / C++ / JUCE 7 / VST3</p>
+    <h3>Klide</h3>
+    <p>
+      A Euclidean-rhythm drum machine and sampler VST3 plugin. It plays four
+      sequences simultaneously, supports WAV samples, and exposes controls for
+      attack, sustain, steps, Euclidean pulses, offset, gain, low-pass frequency,
+      resonance, and DAW sync.
+    </p>
+    <a href="https://github.com/dmodulate/Klide">View repository</a>
+  </article>
+
+  <article class="repo-panel" id="repo-maelderio" role="tabpanel" hidden>
+    <p class="repo-meta">Public repo / HTML / CSS / JavaScript</p>
+    <h3>maelderio</h3>
+    <p>
+      This portfolio site: a lightweight static website with work, about, and
+      blog pages. The blog loads Markdown posts in the browser and renders them
+      with the Marked library.
+    </p>
+    <a href="https://github.com/dmodulate/maelderio">View repository</a>
+  </article>
 </section>
+
+<script>
+  const tabs = document.querySelectorAll(".tab");
+  const panels = document.querySelectorAll(".repo-panel");
+
+  tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+      const selectedPanel = document.getElementById(tab.dataset.tab);
+
+      tabs.forEach(item => {
+        item.classList.remove("active");
+        item.setAttribute("aria-selected", "false");
+      });
+
+      panels.forEach(panel => {
+        panel.classList.remove("active");
+        panel.hidden = true;
+      });
+
+      tab.classList.add("active");
+      tab.setAttribute("aria-selected", "true");
+      selectedPanel.classList.add("active");
+      selectedPanel.hidden = false;
+    });
+  });
+</script>
 
 </body>
 </html>
