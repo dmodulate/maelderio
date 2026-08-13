@@ -246,6 +246,43 @@ a {
   max-width: 900px;
 }
 
+.training-intro {
+  border-top: 1px solid #222;
+  margin: 0 0 28px;
+  padding-top: 22px;
+}
+
+.training-intro h3 {
+  color: #fff;
+  font-size: 26px;
+  margin: 0 0 12px;
+}
+
+.training-intro p {
+  color: #cfcfcf;
+  line-height: 1.65;
+  margin: 0;
+  max-width: 960px;
+}
+
+.training-intro-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  margin-top: 18px;
+}
+
+.training-intro-grid section {
+  border: 1px solid #222;
+  padding: 16px;
+}
+
+.training-intro-grid h4 {
+  color: #fff;
+  font-size: 16px;
+  margin: 0 0 10px;
+}
+
 .training-panel {
   display: grid;
   gap: 22px;
@@ -518,6 +555,21 @@ pre code {
   min-height: 180px;
   padding: 20px;
   text-align: center;
+}
+
+.video-embed {
+  aspect-ratio: 16 / 10;
+  background: #111;
+  border: 1px solid #242424;
+  min-height: 180px;
+  overflow: hidden;
+}
+
+.video-embed iframe {
+  border: 0;
+  display: block;
+  height: 100%;
+  width: 100%;
 }
 
 .code-explainer {
