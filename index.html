@@ -10,226 +10,321 @@
 <nav>
   <h1>Maël Derio</h1>
   <div>
-    <a href="index.html">Work</a>
+    <a href="#apps">Apps</a>
+    <a href="#training">Training</a>
+    <a href="#art">Art</a>
+    <a href="#music">Music</a>
     <a href="cv.html">CV</a>
     <a href="blog.html">Blog</a>
   </div>
 </nav>
 
-<section class="hero">
-  <h2>R&amp;D Software Engineer &amp; Coding Trainer</h2>
-  <p>Audio DSP, creative technology, machine learning, and real-time visual systems.</p>
-</section>
-
-<section class="repo-browser" aria-label="Repository portfolio">
-  <div class="repo-tabs" role="tablist" aria-label="Repositories">
-    <button class="tab active" type="button" role="tab" aria-selected="true" aria-controls="repo-zavalishin" data-tab="repo-zavalishin">Zavalishin</button>
-    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="repo-oscillo" data-tab="repo-oscillo">Oscillo</button>
-    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="repo-juce-lib" data-tab="repo-juce-lib">dmodul8JuceLib</button>
-    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="repo-audiovisual" data-tab="repo-audiovisual">audiovisual</button>
-    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="repo-formation" data-tab="repo-formation">Formation</button>
-    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="repo-processing" data-tab="repo-processing">processing</button>
-    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="repo-klide" data-tab="repo-klide">Klide</button>
-    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="repo-maelderio" data-tab="repo-maelderio">maelderio</button>
+<main>
+<section class="portfolio-section" id="apps" aria-label="Apps">
+  <div class="section-heading">
+    <p class="eyebrow">Work</p>
+    <h2>Apps</h2>
   </div>
 
-  <article class="repo-panel active" id="repo-zavalishin" role="tabpanel">
-    <p class="repo-meta">Private repo / C++ / JUCE 8 / C++20</p>
-    <h3>Zavalishin</h3>
-    <p>
-      A JUCE audio plugin and standalone app project set up with CMake, tests,
-      build metadata, VST3 output, AU output, and optional local plugin copying.
-      The repo is structured as a modern plugin codebase with shared processor
-      and editor code across standalone and plugin formats.
-    </p>
-    <a href="https://github.com/dmodulate/Zavalishin">View repository</a>
-  </article>
+  <div class="tabs" role="tablist" aria-label="Apps">
+    <button class="tab active" type="button" role="tab" aria-selected="true" aria-controls="app-audioviz" data-tab="app-audioviz">Audioviz</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="app-music-visualizer" data-tab="app-music-visualizer">Music Visualizer</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="app-303" data-tab="app-303">303 Synth</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="app-klide" data-tab="app-klide">Klide</button>
+  </div>
 
-  <article class="repo-panel" id="repo-oscillo" role="tabpanel" hidden>
-    <p class="repo-meta">Private repo / C++ / JUCE 8 / C++20</p>
-    <h3>Oscillo</h3>
-    <p>
-      A live oscilloscope plugin and standalone app. It includes waveform
-      display, RMS and peak metering, input-device handling in standalone mode,
-      DAW-controlled routing in plugin mode, release documentation, and unit
-      tests around the audio visualization logic.
-    </p>
-    <a href="https://github.com/dmodulate/Oscillo">View repository</a>
-  </article>
-
-  <article class="repo-panel" id="repo-juce-lib" role="tabpanel" hidden>
-    <p class="repo-meta">Private repo / C++ / reusable JUCE library</p>
-    <h3>dmodul8JuceLib</h3>
-    <p>
-      A personal shared JUCE library extracted from plugin work. It collects
-      reusable audio visualization pieces such as scope data, meters, waveform
-      history, trigger detection, FFT spectrum data, renderers, zoom controls,
-      and popup controls. It is designed to be added as a submodule and compiled
-      selectively by consuming plugin projects.
-    </p>
-    <a href="https://github.com/dmodulate/dmodul8JuceLib">View repository</a>
-  </article>
-
-  <article class="repo-panel" id="repo-audiovisual" role="tabpanel" hidden>
-    <p class="repo-meta">Private repo / Python / ModernGL / GLSL</p>
-    <h3>audiovisual</h3>
-    <p>
-      A real-time generative visual engine driven by live audio. It captures
-      audio, extracts features like RMS, FFT magnitude, spectral centroid,
-      frequency bands, onset, and kick-like transients, then maps them to shader
-      parameters for ModernGL visuals. The project also includes text and
-      Tkinter preview renderers, configs, docs, tests, linting, typing, and CI.
-    </p>
-    <a href="https://github.com/dmodulate/audiovisual">View repository</a>
-  </article>
-
-  <article class="repo-panel" id="repo-formation" role="tabpanel" hidden>
-    <p class="repo-meta">Private repo / C++ / Python / CUDA / MATLAB / course material</p>
-    <h3>Formation</h3>
-    <p>
-      A code-focused training archive. I skipped the document folders and broke
-      out the visible folders under <code>Code/</code> as individual sections.
-    </p>
-
-    <div class="subprojects">
-      <section>
-        <h4>C++14-17</h4>
-        <p>C++ course material with lessons, exercises, links, VS Code setup, libraries, templates, and modern C++17 features.</p>
-      </section>
-      <section>
-        <h4>C++14-17ForParticipants</h4>
-        <p>Participant-facing version of the C++14/C++17 training material, likely prepared as a cleaner course handout track.</p>
-      </section>
-      <section>
-        <h4>C++Advanced</h4>
-        <p>Advanced C++ training material for deeper language, architecture, and implementation topics beyond the introductory course.</p>
-      </section>
-      <section>
-        <h4>C++Debutant</h4>
-        <p>Beginner C++ course content for foundational syntax, control flow, data structures, and programming exercises.</p>
-      </section>
-      <section>
-        <h4>C++Research</h4>
-        <p>Experimental or exploratory C++ material used to test concepts before they become course-ready examples.</p>
-      </section>
-      <section>
-        <h4>CMakeCourse</h4>
-        <p>Training examples around CMake project structure, builds, targets, and modern C/C++ build workflows.</p>
-      </section>
-      <section>
-        <h4>CUDA-Linux</h4>
-        <p>CUDA examples and exercises aimed at Linux-based GPU development workflows.</p>
-      </section>
-      <section>
-        <h4>CUDA</h4>
-        <p>General CUDA training code for parallel programming and GPU computation examples.</p>
-      </section>
-      <section>
-        <h4>DeepLearning</h4>
-        <p>Deep learning course code and exercises, likely combining Python workflows with model-building examples.</p>
-      </section>
-      <section>
-        <h4>DesignPatterns</h4>
-        <p>Code examples for software design patterns and object-oriented architecture exercises.</p>
-      </section>
-      <section>
-        <h4>DesignPatternsForParticipants</h4>
-        <p>Participant-facing design-pattern material prepared for exercises, workshops, or guided lessons.</p>
-      </section>
-      <section>
-        <h4>EdgeAI</h4>
-        <p>Training material for edge AI workflows, combining embedded or local deployment concerns with machine-learning code.</p>
-      </section>
-      <section>
-        <h4>FormationTableauRPython</h4>
-        <p>Data-oriented training material around Tableau, R, and Python workflows.</p>
-      </section>
-      <section>
-        <h4>MatlabDeepLearning</h4>
-        <p>MATLAB examples for deep learning concepts, tooling, and practical model experiments.</p>
-      </section>
-      <section>
-        <h4>MatlabSimulinkComm</h4>
-        <p>MATLAB and Simulink communication examples, likely focused on modeling and signal/system workflows.</p>
-      </section>
-      <section>
-        <h4>Python</h4>
-        <p>Python lessons covering strings, lists, control flow, functions, data structures, modules, formatting, files, exceptions, decorators, OOP, iterators, databases, doctests, and unit tests.</p>
-      </section>
-      <section>
-        <h4>SecureCoding</h4>
-        <p>Secure coding training material focused on writing safer software and recognizing implementation risks.</p>
-      </section>
-      <section>
-        <h4>VSCodeWorkspaces</h4>
-        <p>Workspace setups and editor configuration examples for course or project development environments.</p>
-      </section>
+  <article class="tab-panel active" id="app-audioviz" role="tabpanel">
+    <p class="repo-meta">Oscillo / JUCE 8 / C++20 / audio visualization</p>
+    <h3>Audioviz</h3>
+    <div class="feature-layout">
+      <div>
+        <p>
+          Audioviz is the oscilloscope and spectrum-analysis work from Oscillo:
+          a real-time audio plugin and standalone app. The core waveform view
+          uses a lock-aware circular buffer so the audio thread can keep writing
+          samples while the UI takes coherent snapshots for drawing.
+        </p>
+        <p>
+          For interface images, the cleanest route is to run the standalone app,
+          capture the waveform and spectrum modes with macOS screenshots, then
+          crop them into <code>assets/apps/audioviz-waveform.png</code> and
+          <code>assets/apps/audioviz-spectrum.png</code>.
+        </p>
+      </div>
+      <div class="media-placeholder">
+        <span>Audioviz interface image</span>
+      </div>
     </div>
+    <div class="code-explainer">
+      <pre><code>void ScopeWaveformHistory::pushSamples(
+    const juce::AudioBuffer&lt;float&gt;&amp; buffer,
+    int numInputChannels)
+{
+    readWriteStatus.fetch_add(1, std::memory_order_acq_rel);
+    auto writePosition = scopeWritePosition.load(std::memory_order_relaxed);
 
-    <a href="https://github.com/dmodulate/Formation">View repository</a>
-  </article>
+    for (auto sample = 0; sample &lt; buffer.getNumSamples(); ++sample)
+    {
+        for (auto channel = 0; channel &lt; channelsToStore; ++channel)
+        {
+            const auto storageIndex = channel * scopeSize + writePosition;
+            scopeSamples[storageIndex].store(
+                buffer.getSample(channel, sample),
+                std::memory_order_relaxed);
+        }
 
-  <article class="repo-panel" id="repo-processing" role="tabpanel" hidden>
-    <p class="repo-meta">Private repo / Processing</p>
-    <h3>processing</h3>
-    <p>
-      A Processing sketch repository. The visible project group is
-      <code>UnderstandCircles</code>, with sketches, data folders, images, and
-      Processing sketch settings.
-    </p>
+        writePosition = (writePosition + 1) % scopeSize;
+    }
 
-    <div class="subprojects">
-      <section>
-        <h4>InvertUnderstanding</h4>
-        <p>A Processing sketch under <code>UnderstandCircles</code> with its own <code>.pde</code> source, data folder, images, and sketch properties.</p>
-      </section>
-      <section>
-        <h4>UnderstandCirclesLoadAndSaveParams</h4>
-        <p>A companion Processing sketch focused on the same circle-understanding visual system, with added project structure for loading and saving parameters.</p>
-      </section>
+    scopeWritePosition.store(writePosition, std::memory_order_release);
+    readWriteStatus.fetch_add(1, std::memory_order_release);
+}</code></pre>
+      <p>
+        The samples are stored in per-channel rings. The UI checks the
+        read/write status before and after copying; if the audio thread writes
+        during the copy, the UI discards that snapshot and tries again.
+      </p>
     </div>
-
-    <a href="https://github.com/dmodulate/processing">View repository</a>
   </article>
 
-  <article class="repo-panel" id="repo-klide" role="tabpanel" hidden>
-    <p class="repo-meta">Public repo / C++ / JUCE 7 / VST3</p>
+  <article class="tab-panel" id="app-music-visualizer" role="tabpanel" hidden>
+    <p class="repo-meta">audiovisual / Python / ModernGL / GLSL</p>
+    <h3>Music Visualizer</h3>
+    <div class="feature-layout">
+      <div>
+        <p>
+          Music Visualizer is a real-time audio-reactive visual engine. Python
+          extracts deterministic audio features from live input, maps them to
+          visual parameters, then sends those parameters to GLSL shaders.
+        </p>
+        <p>
+          Good images here would be stills from the particle and fluid shader
+          presets, plus a short screen recording exported as a poster frame.
+        </p>
+      </div>
+      <div class="media-placeholder">
+        <span>Shader still image</span>
+      </div>
+    </div>
+    <div class="split-code">
+      <div class="code-explainer">
+        <pre><code>def compute_kick(signal, sample_rate):
+    split = signal.size // 2
+    previous_bass = compute_frequency_bands(
+        signal[:split], sample_rate)["bass"]
+    current_bass = compute_frequency_bands(
+        signal[split:], sample_rate)["bass"]
+
+    growth = max(0.0, current_bass - previous_bass)
+    kick = current_bass * 0.65 + growth * 0.35
+    return float(np.clip(kick, 0.0, 1.0))</code></pre>
+        <p>
+          This feature estimates a kick by combining current bass energy with
+          low-frequency growth between the first and second half of the audio
+          window.
+        </p>
+      </div>
+      <div class="code-explainer">
+        <pre><code>float kick = clamp(u_kick, 0.0, 1.0);
+float body_radius = 0.28 + bass_body * 0.34;
+float shell = 1.0 - smoothstep(
+    0.018, 0.12, abs(radius - burst_radius));
+
+float value = clamp(
+    body * 0.30
+    + shell * (kick * 0.35 + flash * 0.18)
+    + burst
+    + afterglow,
+    0.0, 1.0);</code></pre>
+        <p>
+          The shader turns audio features into visible structure: bass inflates
+          the body, kick expands a shell, highs add detail, and flash brightens
+          the transient.
+        </p>
+      </div>
+    </div>
+  </article>
+
+  <article class="tab-panel" id="app-303" role="tabpanel" hidden>
+    <p class="repo-meta">Zavalishin / JUCE 8 / C++20 / acid synthesizer</p>
+    <h3>303 Synth</h3>
+    <div class="feature-layout">
+      <div>
+        <p>
+          A 303 emulation is not just a saw oscillator through a generic low-pass
+          filter. The signature comes from the interaction of slide/accent
+          behavior, a bright saw/square oscillator, envelope-shaped cutoff, and
+          the resonant diode-ladder low-pass filter.
+        </p>
+        <p>
+          This project models the filter as a topology-preserving transform
+          diode ladder. Resonance is solved inside the same sample with Newton
+          iterations, avoiding an extra feedback delay and keeping the resonant
+          peak closer to the intended cutoff.
+        </p>
+      </div>
+      <div class="media-placeholder">
+        <span>303 synth interface image</span>
+      </div>
+    </div>
+    <div class="code-explainer">
+      <pre><code>float u4Estimate = s4;
+
+for (auto iteration = 0; iteration &lt; 4; ++iteration)
+{
+    const float drive = compensatedInput - k * u4Estimate;
+    const float saturated = std::tanh(drive);
+    const float f = a4 * saturated
+        + statesContribution - u4Estimate;
+    const float fDerivative =
+        a4 * (-k * (1.0f - saturated * saturated)) - 1.0f;
+    u4Estimate -= f / fDerivative;
+}</code></pre>
+      <p>
+        The filter is specific because the resonance feedback is implicit:
+        the current sample's output depends on itself. Solving that loop gives
+        the nonlinear diode saturation and resonance their 303-like bite.
+      </p>
+    </div>
+  </article>
+
+  <article class="tab-panel" id="app-klide" role="tabpanel" hidden>
+    <p class="repo-meta">Klide / JUCE 7 / C++17 / older project</p>
     <h3>Klide</h3>
-    <p>
-      A Euclidean-rhythm drum machine and sampler VST3 plugin. It plays four
-      sequences simultaneously, supports WAV samples, and exposes controls for
-      attack, sustain, steps, Euclidean pulses, offset, gain, low-pass frequency,
-      resonance, and DAW sync.
-    </p>
-    <a href="https://github.com/dmodulate/Klide">View repository</a>
-  </article>
+    <div class="feature-layout">
+      <div>
+        <p>
+          Klide is an older Euclidean rhythm drum-machine VST3. It can run four
+          sample sequences and distribute pulses across a fixed number of steps
+          with the Bjorklund algorithm. It is a meaningful early project, but it
+          needs refactoring: clearer naming, modern JUCE/CMake structure, tests,
+          and separation between sequencing, audio, and UI state.
+        </p>
+      </div>
+      <div class="media-placeholder">
+        <span>Klide interface image</span>
+      </div>
+    </div>
+    <div class="code-explainer">
+      <pre><code>do {
+    count_[level] = divisor / remainder_[level];
+    remainder_[level + 1] = divisor % remainder_[level];
+    divisor = remainder_[level];
+    level = level + 1;
+} while (remainder_[level] &gt; 1);
 
-  <article class="repo-panel" id="repo-maelderio" role="tabpanel" hidden>
-    <p class="repo-meta">Public repo / HTML / CSS / JavaScript</p>
-    <h3>maelderio</h3>
-    <p>
-      This portfolio site: a lightweight static website with work, about, and
-      blog pages. The blog loads Markdown posts in the browser and renders them
-      with the Marked library.
-    </p>
-    <a href="https://github.com/dmodulate/maelderio">View repository</a>
+count_[level] = divisor;
+build_string(level, reverse);</code></pre>
+      <p>
+        Bjorklund's algorithm repeatedly divides rests by pulses to create the
+        most even distribution possible. For example, 5 pulses over 16 steps
+        becomes a rhythm where the gaps are balanced rather than clustered.
+      </p>
+    </div>
   </article>
 </section>
 
-<script>
-  const tabs = document.querySelectorAll(".tab");
-  const panels = document.querySelectorAll(".repo-panel");
+<section class="portfolio-section" id="training" aria-label="Training">
+  <div class="section-heading">
+    <p class="eyebrow">Courses</p>
+    <h2>Training</h2>
+  </div>
 
-  tabs.forEach(tab => {
+  <div class="tabs compact-tabs" role="tablist" aria-label="Training courses">
+    <button class="tab active" type="button" role="tab" aria-selected="true" aria-controls="course-cpp14" data-tab="course-cpp14">C++14-17</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="course-cpp-participants" data-tab="course-cpp-participants">C++ Participants</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="course-cpp-advanced" data-tab="course-cpp-advanced">C++ Advanced</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="course-cpp-beginner" data-tab="course-cpp-beginner">C++ Debutant</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="course-cpp-research" data-tab="course-cpp-research">C++ Research</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="course-cmake" data-tab="course-cmake">CMake</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="course-cuda-linux" data-tab="course-cuda-linux">CUDA Linux</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="course-cuda" data-tab="course-cuda">CUDA</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="course-deep-learning" data-tab="course-deep-learning">Deep Learning</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="course-patterns" data-tab="course-patterns">Design Patterns</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="course-patterns-participants" data-tab="course-patterns-participants">Patterns Participants</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="course-edge-ai" data-tab="course-edge-ai">Edge AI</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="course-tableau" data-tab="course-tableau">Tableau R Python</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="course-matlab-dl" data-tab="course-matlab-dl">MATLAB Deep Learning</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="course-simulink" data-tab="course-simulink">MATLAB Simulink</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="course-python" data-tab="course-python">Python</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="course-secure" data-tab="course-secure">Secure Coding</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="course-vscode" data-tab="course-vscode">VS Code</button>
+  </div>
+
+  <article class="tab-panel active" id="course-cpp14" role="tabpanel"><h3>C++14-17</h3><p>Modern C++ course material covering language evolution, exercises, libraries, templates, and VS Code workflow.</p></article>
+  <article class="tab-panel" id="course-cpp-participants" role="tabpanel" hidden><h3>C++14-17ForParticipants</h3><p>Participant-facing material for C++14/C++17 courses, structured for workshops and guided exercises.</p></article>
+  <article class="tab-panel" id="course-cpp-advanced" role="tabpanel" hidden><h3>C++Advanced</h3><p>Advanced C++ content for experienced developers: deeper language mechanics, architecture, idioms, and maintainable implementation.</p></article>
+  <article class="tab-panel" id="course-cpp-beginner" role="tabpanel" hidden><h3>C++Debutant</h3><p>Introductory C++ training for foundations: syntax, control flow, functions, data structures, compilation, and debugging.</p></article>
+  <article class="tab-panel" id="course-cpp-research" role="tabpanel" hidden><h3>C++Research</h3><p>Exploratory C++ examples and research material used to test ideas before turning them into course exercises.</p></article>
+  <article class="tab-panel" id="course-cmake" role="tabpanel" hidden><h3>CMakeCourse</h3><p>Modern CMake training: project structure, targets, dependencies, build types, and reproducible C/C++ workflows.</p></article>
+  <article class="tab-panel" id="course-cuda-linux" role="tabpanel" hidden><h3>CUDA-Linux</h3><p>CUDA development material focused on Linux toolchains, GPU compilation, and practical parallel-programming setup.</p></article>
+  <article class="tab-panel" id="course-cuda" role="tabpanel" hidden><h3>CUDA</h3><p>General CUDA exercises for GPU programming, kernel design, memory movement, and parallel computation concepts.</p></article>
+  <article class="tab-panel" id="course-deep-learning" role="tabpanel" hidden><h3>DeepLearning</h3><p>Deep learning course code for model training, image recognition, CNN concepts, and applied ML workflows.</p></article>
+  <article class="tab-panel" id="course-patterns" role="tabpanel" hidden><h3>DesignPatterns</h3><p>Design-pattern examples for object-oriented architecture, refactoring conversations, and reusable software design vocabulary.</p></article>
+  <article class="tab-panel" id="course-patterns-participants" role="tabpanel" hidden><h3>DesignPatternsForParticipants</h3><p>Participant-ready pattern exercises and examples for classroom delivery.</p></article>
+  <article class="tab-panel" id="course-edge-ai" role="tabpanel" hidden><h3>EdgeAI</h3><p>Material around deploying AI closer to devices and constrained environments, with attention to practical engineering constraints.</p></article>
+  <article class="tab-panel" id="course-tableau" role="tabpanel" hidden><h3>FormationTableauRPython</h3><p>Data analytics course material combining Tableau, R, and Python workflows.</p></article>
+  <article class="tab-panel" id="course-matlab-dl" role="tabpanel" hidden><h3>MatlabDeepLearning</h3><p>MATLAB deep learning examples, including model workflows and image-recognition concepts.</p></article>
+  <article class="tab-panel" id="course-simulink" role="tabpanel" hidden><h3>MatlabSimulinkComm</h3><p>MATLAB, Simulink, and Stateflow communication-system training material.</p></article>
+  <article class="tab-panel" id="course-python" role="tabpanel" hidden><h3>Python</h3><p>Python course track covering strings, lists, control flow, functions, data structures, modules, files, exceptions, decorators, OOP, iterators, databases, doctests, and unit tests.</p></article>
+  <article class="tab-panel" id="course-secure" role="tabpanel" hidden><h3>SecureCoding</h3><p>Secure coding material for recognizing implementation risks and building safer software habits.</p></article>
+  <article class="tab-panel" id="course-vscode" role="tabpanel" hidden><h3>VSCodeWorkspaces</h3><p>Editor and workspace setups for training environments and repeatable development workflows.</p></article>
+</section>
+
+<section class="portfolio-section" id="art" aria-label="Art">
+  <div class="section-heading">
+    <p class="eyebrow">Creative systems</p>
+    <h2>Art</h2>
+  </div>
+
+  <div class="tabs" role="tablist" aria-label="Processing projects">
+    <button class="tab active" type="button" role="tab" aria-selected="true" aria-controls="art-invert" data-tab="art-invert">InvertUnderstanding</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="art-load-save" data-tab="art-load-save">Load And Save Params</button>
+  </div>
+
+  <article class="tab-panel active" id="art-invert" role="tabpanel">
+    <h3>InvertUnderstanding</h3>
+    <p>A Processing sketch from the UnderstandCircles project group, with image and data folders. This belongs to the visual-research side of the portfolio: parameterized systems, geometric exploration, and interactive visual composition.</p>
+    <div class="media-placeholder"><span>Processing artwork still</span></div>
+  </article>
+
+  <article class="tab-panel" id="art-load-save" role="tabpanel" hidden>
+    <h3>UnderstandCirclesLoadAndSaveParams</h3>
+    <p>A companion Processing sketch focused on preserving parameter states. This is useful for turning live visual exploration into repeatable compositions.</p>
+    <div class="media-placeholder"><span>Parameter study image</span></div>
+  </article>
+</section>
+
+<section class="portfolio-section" id="music" aria-label="Music">
+  <div class="section-heading">
+    <p class="eyebrow">Sound</p>
+    <h2>Music</h2>
+  </div>
+  <article class="tab-panel active">
+    <h3>Electronic music, DJ sets, and audio-reactive visuals</h3>
+    <p>
+      This section can collect live sets, releases, playlists, festival traces,
+      and the sound sources that drive the visual systems. Good assets here
+      would be embedded mixes, performance photos, short video loops, and stills
+      from audio-reactive visuals.
+    </p>
+  </article>
+</section>
+</main>
+
+<script>
+  document.querySelectorAll(".tab").forEach(tab => {
     tab.addEventListener("click", () => {
+      const tabsContainer = tab.closest(".tabs");
+      const section = tab.closest(".portfolio-section");
       const selectedPanel = document.getElementById(tab.dataset.tab);
 
-      tabs.forEach(item => {
+      tabsContainer.querySelectorAll(".tab").forEach(item => {
         item.classList.remove("active");
         item.setAttribute("aria-selected", "false");
       });
 
-      panels.forEach(panel => {
+      section.querySelectorAll(".tab-panel").forEach(panel => {
         panel.classList.remove("active");
         panel.hidden = true;
       });
