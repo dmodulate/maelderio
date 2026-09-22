@@ -557,6 +557,23 @@ pre code {
   align-self: center;
 }
 
+.download-action {
+  margin-top: 18px;
+}
+
+.download-action a {
+  border: 1px solid #3a3a3a;
+  color: #f2f2f2;
+  display: inline-flex;
+  margin: 0;
+  padding: 10px 12px;
+}
+
+.download-action a:hover {
+  background: #eaeaea;
+  color: #0a0a0a;
+}
+
 .media-placeholder {
   align-items: center;
   aspect-ratio: 16 / 10;
