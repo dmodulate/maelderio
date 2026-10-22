@@ -850,3 +850,97 @@ pre code {
   cursor: pointer;
   margin-bottom: 10px;
 }
+
+.back-link {
+  margin: 0 0 16px;
+}
+
+.back-link a {
+  margin-left: 0;
+}
+
+.download-panel,
+.changelog {
+  border: 1px solid #222;
+  margin-top: 20px;
+  max-width: 960px;
+  padding: 24px;
+}
+
+.download-panel h3,
+.changelog h3 {
+  font-size: 24px;
+  margin: 0 0 12px;
+}
+
+.download-panel ul,
+.changelog > p {
+  color: #cfcfcf;
+  line-height: 1.6;
+}
+
+.download-panel ul {
+  padding-left: 20px;
+}
+
+.change-group {
+  border-top: 1px solid #222;
+  padding: 18px 0 6px;
+}
+
+.change-group h4 {
+  color: #fff;
+  font-size: 16px;
+  margin: 0 0 4px;
+}
+
+.change-meta {
+  color: #999;
+  font-size: 13px;
+  margin: 0 0 10px;
+}
+
+.change-list {
+  color: #cfcfcf;
+  line-height: 1.5;
+  list-style: none;
+  margin: 0 0 12px;
+  padding: 0;
+}
+
+.change-list > li {
+  border-left: 2px solid #2a2a2a;
+  margin: 0 0 6px;
+  padding: 2px 0 2px 12px;
+}
+
+.change-list summary {
+  cursor: pointer;
+}
+
+.change-list summary:hover .change-title {
+  color: #fff;
+}
+
+.change-body {
+  color: #aaa;
+  font-size: 14px;
+  line-height: 1.55;
+  padding: 6px 0 4px;
+}
+
+.change-body p {
+  margin: 0 0 8px;
+}
+
+.change-body ul,
+.change-body ol {
+  margin: 0 0 8px;
+  padding-left: 20px;
+}
+
+.downloads-heading {
+  color: #fff;
+  font-size: 16px;
+  margin: 20px 0 0;
+}
