@@ -236,7 +236,7 @@ float value = clamp(
   </article>
 
   <article class="tab-panel" id="app-303" role="tabpanel" hidden>
-    <p class="repo-meta">Zavalishin / JUCE 8 / C++20 / acid synthesizer</p>
+    <p class="repo-meta">Davai / JUCE 8 / C++20 / acid synthesizer</p>
     <h3>Davai</h3>
     <div class="feature-layout">
       <div>
@@ -300,6 +300,22 @@ float value = clamp(
         200 ms to 2 s filter decay, the fixed 200 ms decay on accented notes,
         and the 22 ms slide (a 100 kΩ resistor charging a 0.22 µF capacitor).
         Values with no source are marked as estimates in the design notes.
+      </p>
+      <p>
+        The other half of Davai's inspiration is the Novation Bass Station II,
+        a modern analog mono synth that also has a 303-style "Acid" diode
+        filter. Davai takes its broader voice architecture from it:
+      </p>
+      <ul>
+        <li><strong>Voice:</strong> two oscillators, a sub oscillator, noise and a ring modulator, mixed before the filter.</li>
+        <li><strong>Filter choice:</strong> a classic transistor ladder alongside the acid diode ladder.</li>
+        <li><strong>Osc Filter Mod:</strong> the second oscillator can modulate the filter's cutoff at audio rate, for growling, metallic tones.</li>
+        <li><strong>Signal path:</strong> Davai follows the same order, filter first, then the amplifier stage.</li>
+      </ul>
+      <p>
+        So Davai sits between the two machines: the 303's circuit and its
+        slide-and-accent phrasing, inside a richer, Bass Station-style synth
+        voice.
       </p>
       <h5>Environment and Tooling</h5>
       <ul>
