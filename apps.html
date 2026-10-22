@@ -253,12 +253,10 @@ float value = clamp(
           peak closer to the intended cutoff.
         </p>
         <p>
-          Davai 0.9.1 ships with installers. On macOS, the signed and notarized
-          installer lets you choose the VST3 plugin, the Audio Unit plugin, and
-          the factory presets, for your user only or for every user of the Mac.
-          On Windows (64-bit), the installer sets up the VST3 plugin and the
-          factory presets. Restart or rescan your music software afterwards so
-          it finds Davai.
+          Download the installer for your computer and follow the steps. The Mac
+          version installs the VST3 and AU plugins. The Windows version installs
+          the VST3 plugin. Both come with factory presets. Once it's installed,
+          restart your music software so it can find Davai.
         </p>
         <p class="download-action">
           <a href="assets/downloads/303-synth/Davai-0.9.1.dmg" download>
@@ -288,7 +286,7 @@ float value = clamp(
         <li>Build: CMake release configuration with generated JUCE headers and shared sources for plugin and standalone targets.</li>
         <li>Targets: standalone app plus plugin formats such as VST3 and AU.</li>
         <li>CI: GitHub Actions on macOS, with submodules, ccache, clang-format checks, CMake build, and CTest.</li>
-        <li>Distribution: a signed and notarized macOS installer (.dmg holding a .pkg), and a Windows installer built with Inno Setup.</li>
+        <li>Installers: a signed macOS installer and a Windows installer made with Inno Setup.</li>
       </ul>
     </section>
     <div class="code-explainer">
@@ -415,28 +413,45 @@ build_string(level, reverse);</code></pre>
 </main>
 
 <script>
+  function showTab(tab) {
+    const tabsContainer = tab.closest(".tabs");
+    const section = tab.closest(".portfolio-section");
+    const selectedPanel = document.getElementById(tab.dataset.tab);
+
+    tabsContainer.querySelectorAll(".tab").forEach(item => {
+      item.classList.remove("active");
+      item.setAttribute("aria-selected", "false");
+    });
+
+    section.querySelectorAll(".tab-panel").forEach(panel => {
+      panel.classList.remove("active");
+      panel.hidden = true;
+    });
+
+    tab.classList.add("active");
+    tab.setAttribute("aria-selected", "true");
+    selectedPanel.classList.add("active");
+    selectedPanel.hidden = false;
+  }
+
+  // Open the tab named in the URL hash, e.g. apps.html#app-303
+  function showTabFromHash() {
+    const id = decodeURIComponent(location.hash.slice(1));
+    const tab = id && document.querySelector(`.tab[data-tab="${CSS.escape(id)}"]`);
+    if (tab) {
+      showTab(tab);
+    }
+  }
+
   document.querySelectorAll(".tab").forEach(tab => {
     tab.addEventListener("click", () => {
-      const tabsContainer = tab.closest(".tabs");
-      const section = tab.closest(".portfolio-section");
-      const selectedPanel = document.getElementById(tab.dataset.tab);
-
-      tabsContainer.querySelectorAll(".tab").forEach(item => {
-        item.classList.remove("active");
-        item.setAttribute("aria-selected", "false");
-      });
-
-      section.querySelectorAll(".tab-panel").forEach(panel => {
-        panel.classList.remove("active");
-        panel.hidden = true;
-      });
-
-      tab.classList.add("active");
-      tab.setAttribute("aria-selected", "true");
-      selectedPanel.classList.add("active");
-      selectedPanel.hidden = false;
+      showTab(tab);
+      history.replaceState(null, "", `#${tab.dataset.tab}`);
     });
   });
+
+  showTabFromHash();
+  window.addEventListener("hashchange", showTabFromHash);
 
   const copyIcon = `
     <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
