@@ -605,6 +605,17 @@ pre code {
   width: 100%;
 }
 
+.video-embed-3x2 {
+  aspect-ratio: 3 / 2;
+}
+
+.video-embed video {
+  display: block;
+  height: 100%;
+  object-fit: contain;
+  width: 100%;
+}
+
 .code-explainer {
   display: grid;
   gap: 14px;
