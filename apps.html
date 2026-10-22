@@ -252,15 +252,20 @@ float value = clamp(
           iterations, avoiding an extra feedback delay and keeping the resonant
           peak closer to the intended cutoff.
         </p>
+        <p>
+          Davai 0.9.1 ships with installers. On macOS, the signed and notarized
+          installer lets you choose the VST3 plugin, the Audio Unit plugin, and
+          the factory presets, for your user only or for every user of the Mac.
+          On Windows (64-bit), the installer sets up the VST3 plugin and the
+          factory presets. Restart or rescan your music software afterwards so
+          it finds Davai.
+        </p>
         <p class="download-action">
-          <a href="assets/downloads/303-synth/Davai-Windows-VST3.zip" download>
-            Download Davai Windows VST3 plugin (.zip)
+          <a href="assets/downloads/303-synth/Davai-0.9.1.dmg" download>
+            Download Davai for macOS (.dmg)
           </a>
-          <a href="assets/downloads/303-synth/Davai-macOS-AU.zip" download>
-            Download Davai macOS AU plugin (.zip)
-          </a>
-          <a href="assets/downloads/303-synth/Davai-macOS-VST3.zip" download>
-            Download Davai macOS VST3 plugin (.zip)
+          <a href="assets/downloads/303-synth/Davai-0.9.1-Setup.exe" download>
+            Download Davai for Windows (.exe)
           </a>
         </p>
       </div>
@@ -283,6 +288,7 @@ float value = clamp(
         <li>Build: CMake release configuration with generated JUCE headers and shared sources for plugin and standalone targets.</li>
         <li>Targets: standalone app plus plugin formats such as VST3 and AU.</li>
         <li>CI: GitHub Actions on macOS, with submodules, ccache, clang-format checks, CMake build, and CTest.</li>
+        <li>Distribution: a signed and notarized macOS installer (.dmg holding a .pkg), and a Windows installer built with Inno Setup.</li>
       </ul>
     </section>
     <div class="code-explainer">
