@@ -310,37 +310,6 @@ float value = clamp(
         <li>Installers: a signed and notarized macOS installer, and a Windows installer made with Inno Setup.</li>
       </ul>
     </section>
-    <div class="code-explainer">
-      <h4>Code snippet</h4>
-      <pre><code>for (int i = 0; i &lt; maxIterations; ++i)
-{
-    const float t = std::tanh(Gamma * u + sigma);
-    const float F = u - x + k * t;
-    const float Fprime = 1.0f + k * Gamma * (1.0f - t * t);
-
-    if (std::abs(F) &lt;= residualTolerance)
-        break;
-
-    if (F &lt; 0.0f)
-        lo = u;
-    else
-        hi = u;
-
-    const float newtonU = u - F / Fprime;
-    const bool safeNewton = std::isfinite(newtonU)
-        &amp;&amp; newtonU &gt; lo &amp;&amp; newtonU &lt; hi;
-
-    u = safeNewton ? newtonU : 0.5f * (lo + hi);
-}</code></pre>
-      <p>
-        The filter's resonance feeds its output back into its input, so each
-        sample depends on itself. This loop solves that equation inside the
-        same sample, with the <code>tanh</code> giving the diodes their
-        saturation. It uses Newton's method, but keeps the answer inside a
-        known range and falls back to halving that range when a Newton step
-        would jump out. That way it always converges, even at high resonance.
-      </p>
-    </div>
     <section class="architecture">
       <h4>Architecture</h4>
       <p>
