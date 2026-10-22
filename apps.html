@@ -237,100 +237,132 @@ float value = clamp(
 
   <article class="tab-panel" id="app-303" role="tabpanel" hidden>
     <p class="repo-meta">Zavalishin / JUCE 8 / C++20 / acid synthesizer</p>
-    <h3>303 Synth</h3>
+    <h3>Davai</h3>
     <div class="feature-layout">
       <div>
         <p>
-          A 303 emulation is not just a saw oscillator through a generic low-pass
-          filter. The signature comes from the interaction of slide/accent
-          behavior, a bright saw/square oscillator, envelope-shaped cutoff, and
-          the resonant diode-ladder low-pass filter.
+          <strong>Davai</strong> is a synthesizer built around a
+          <strong>virtual analog filter</strong>: an emulation of the TB-303's
+          diode ladder, the squelchy, resonant heart of acid. The filter is
+          custom code, written by hand. It's solved sample by sample with
+          zero-delay feedback and nonlinear resonance, and runs at 4×
+          oversampling. Its math comes from Vadim Zavalishin's book
+          <em>The Art of VA Filter Design</em> and Will Pirkle's application
+          notes <em>Virtual Analog Diode Ladder Filter</em> (App Note 6) and
+          <em>Virtual Analog (VA) Filter Implementation and Comparisons</em>
+          (App Note 4).
         </p>
         <p>
-          This project models the filter as a topology-preserving transform
-          diode ladder. Resonance is solved inside the same sample with Newton
-          iterations, avoiding an extra feedback delay and keeping the resonant
-          peak closer to the intended cutoff.
+          Around the filter: oscillators, envelopes, three LFOs (including a
+          Lorenz chaos mode), a modulation matrix, an arpeggiator, a piano-roll
+          sequencer, a full effects chain, and factory presets to start from.
+          The rest of the instrument and its interface was built through a
+          careful, iterative process of AI-assisted "vibe coding": every part
+          was tried, played and refined until it felt right.
         </p>
         <p>
-          Download the installer for your computer and follow the steps. The Mac
-          version installs the VST3 and AU plugins. The Windows version installs
-          the VST3 plugin. Both come with factory presets. Once it's installed,
-          restart your music software so it can find Davai.
+          Davai runs as a VST3 and Audio Unit plugin on Mac, as a VST3 on
+          Windows, and as a standalone app on iPad.
         </p>
+        <ul class="download-list">
+          <li><strong>macOS</strong> (VST3 + Audio Unit, Apple Silicon &amp; Intel)</li>
+          <li>
+            <strong>Windows</strong> (VST3, 64-bit). Windows may show "Unknown
+            publisher": click <em>More info → Run anyway</em>.
+          </li>
+        </ul>
         <p class="download-action">
           <a href="assets/downloads/303-synth/Davai-0.9.1.dmg" download>
-            Download Davai for macOS (.dmg)
+            Download Davai-0.9.1.dmg (macOS)
           </a>
           <a href="assets/downloads/303-synth/Davai-0.9.1-Setup.exe" download>
-            Download Davai for Windows (.exe)
+            Download Davai-0.9.1-Setup.exe (Windows)
           </a>
         </p>
       </div>
       <div class="media-placeholder">
-        <span>303 synth interface image</span>
+        <span>Davai interface image</span>
       </div>
     </div>
     <section class="app-detail">
       <h4>Conception</h4>
-      <h5>Environment and Tooling</h5>
+      <h5>Where it comes from</h5>
       <p>
-        Built as a JUCE synthesizer plugin in C++20 with CMake 3.22, using the
-        same modern JUCE/CMake structure as the recent audio projects. The
-        project uses a JUCE submodule, generated build information, optional
-        ccache, and a tested CMake build.
+        The Roland TB-303 Bass Line came out in 1981 as a practice box for
+        guitarists, and was dropped in 1984 after about 10,000 units. A few
+        years later, Chicago producers pushed its resonant filter hard, and it
+        became the sound of acid house.
       </p>
+      <p>
+        Davai follows the 303's circuit, using the published analysis of the
+        <strong>Devil Fish</strong>, Robin Whittle's hardware mod of the 303.
+        Where the Devil Fish manual gives a real value, Davai uses it: the
+        200 ms to 2 s filter decay, the fixed 200 ms decay on accented notes,
+        and the 22 ms slide (a 100 kΩ resistor charging a 0.22 µF capacitor).
+        Values with no source are marked as estimates in the design notes.
+      </p>
+      <h5>Environment and Tooling</h5>
       <ul>
-        <li>Language: C++20, with compiler extensions disabled.</li>
-        <li>Frameworks: JUCE audio utilities, audio devices, DSP, events, GUI extra, and plugin wrappers.</li>
-        <li>Build: CMake release configuration with generated JUCE headers and shared sources for plugin and standalone targets.</li>
-        <li>Targets: standalone app plus plugin formats such as VST3 and AU.</li>
-        <li>CI: GitHub Actions on macOS, with submodules, ccache, clang-format checks, CMake build, and CTest.</li>
-        <li>Installers: a signed macOS installer and a Windows installer made with Inno Setup.</li>
+        <li>Language: C++20, built with CMake and JUCE 8 (as a git submodule).</li>
+        <li>Formats: VST3 and AU on macOS, VST3 on Windows, standalone app on iPad.</li>
+        <li>Tests: JUCE unit tests run with CTest. The DSP classes are plain C++ so they can be tested on their own.</li>
+        <li>CI: GitHub Actions, with clang-format checks, build, and tests.</li>
+        <li>Installers: a signed and notarized macOS installer, and a Windows installer made with Inno Setup.</li>
       </ul>
     </section>
     <div class="code-explainer">
       <h4>Code snippet</h4>
-      <pre><code>float u4Estimate = s4;
-
-for (auto iteration = 0; iteration &lt; 4; ++iteration)
+      <pre><code>for (int i = 0; i &lt; maxIterations; ++i)
 {
-    const float drive = compensatedInput - k * u4Estimate;
-    const float saturated = std::tanh(drive);
-    const float f = a4 * saturated
-        + statesContribution - u4Estimate;
-    const float fDerivative =
-        a4 * (-k * (1.0f - saturated * saturated)) - 1.0f;
-    u4Estimate -= f / fDerivative;
+    const float t = std::tanh(Gamma * u + sigma);
+    const float F = u - x + k * t;
+    const float Fprime = 1.0f + k * Gamma * (1.0f - t * t);
+
+    if (std::abs(F) &lt;= residualTolerance)
+        break;
+
+    if (F &lt; 0.0f)
+        lo = u;
+    else
+        hi = u;
+
+    const float newtonU = u - F / Fprime;
+    const bool safeNewton = std::isfinite(newtonU)
+        &amp;&amp; newtonU &gt; lo &amp;&amp; newtonU &lt; hi;
+
+    u = safeNewton ? newtonU : 0.5f * (lo + hi);
 }</code></pre>
       <p>
-        The filter is specific because the resonance feedback is implicit:
-        the current sample's output depends on itself. Solving that loop gives
-        the nonlinear diode saturation and resonance their 303-like bite.
+        The filter's resonance feeds its output back into its input, so each
+        sample depends on itself. This loop solves that equation inside the
+        same sample, with the <code>tanh</code> giving the diodes their
+        saturation. It uses Newton's method, but keeps the answer inside a
+        known range and falls back to halving that range when a Newton step
+        would jump out. That way it always converges, even at high resonance.
       </p>
     </div>
     <section class="architecture">
       <h4>Architecture</h4>
       <p>
-        The project keeps the synthesizer engine, parameters, and UI panels in
-        separate layers:
-        <code>parameters -> PluginProcessor -> oscillator/filter DSP -> PluginEditor panels</code>.
-        That makes it easier to reason about audio behavior independently from
-        the knobs that control it.
+        The sound follows the 303's own path:
+        <code>Oscillators -> Filter -> Amp envelope -> Effects</code>.
+        Each part of the original circuit has its own class:
       </p>
       <ul>
-        <li><code>Source/Audio/PluginProcessor.cpp</code>: owns the audio callback, MIDI/audio processing flow, parameter reads, and the connection between DSP components.</li>
-        <li><code>Source/State/ZavalishinParameters.cpp</code>: centralizes plugin parameters so the editor and processor share one typed parameter model.</li>
-        <li>Oscillator DSP: generates the acid-style saw/square source, with anti-aliasing concerns separated from filter behavior.</li>
-        <li>Filter DSP: models the nonlinear topology-preserving diode ladder. Solving the feedback path inside the sample is what preserves the resonant, saturated 303 character.</li>
-        <li><code>Source/UI/Panels</code>: splits oscillator and filter controls into dedicated panels so each sound block has a matching visual control group.</li>
-        <li><code>Source/UI/Controls</code> and LookAndFeel: provide reusable labeled knobs, toggles, and visual style, keeping the editor code from becoming a pile of widget setup.</li>
-        <li><code>Source/Standalone</code>: provides a standalone wrapper while sharing the same audio engine and editor as plugin formats.</li>
+        <li><code>Oscillator</code>: the 303's oscillator, one phase ramp with a saw or square output. PolyBLEP smooths the hard edges to avoid aliasing. A second oscillator, a sub oscillator, and noise are added on top.</li>
+        <li><code>TB303DiodeFilter</code>: the hand-written diode ladder filter, run at 4× oversampling. A transistor ladder is also available.</li>
+        <li><code>AttackDecayEnvelope</code>: the 303's filter envelope. Like the hardware, it ignores note-off and always finishes its decay.</li>
+        <li><code>AdsrEnvelope</code>: the amp envelope. The 303's was fixed; this one is a full ADSR with editable curves.</li>
+        <li>Accent: two separate envelopes, one boosting the volume and one sweeping the filter, as in the real circuit.</li>
+        <li><code>PitchGlide</code>: the slide between notes, modeled as the same simple RC lag as the hardware.</li>
+        <li><code>StepSequencer</code> and <code>PianoRollSequencer</code>: patterns with real accent and slide flags on each step or note. From a MIDI keyboard, accent comes from velocity and slide from playing legato.</li>
+        <li><code>LfoModulationMatrix</code> and <code>ModEnvelopeMatrix</code>: three LFOs and a modulation envelope can each drive any parameter. Their effects add up instead of overriding each other.</li>
+        <li>Effects: nine stages (two filters, saturation, distortion, chorus, delay, EQ, compressor, reverb) in an order you can change.</li>
       </ul>
       <p>
-        The architecture favors small DSP units and a thin processor because
-        303 emulation depends on subtle interactions between oscillator level,
-        cutoff modulation, resonance, and saturation.
+        The DSP lives in <code>Source/Audio</code>, the parameters in
+        <code>Source/State</code>, and the interface in
+        <code>Source/UI</code>, with one panel per section of the synth.
       </p>
     </section>
   </article>
