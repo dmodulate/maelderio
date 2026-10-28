@@ -609,6 +609,10 @@ pre code {
   aspect-ratio: 3 / 2;
 }
 
+.video-embed-12x7 {
+  aspect-ratio: 12 / 7;
+}
+
 .video-embed video {
   display: block;
   height: 100%;
