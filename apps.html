@@ -28,13 +28,123 @@
   </div>
 
   <div class="tabs" role="tablist" aria-label="Apps">
-    <button class="tab active" type="button" role="tab" aria-selected="true" aria-controls="app-audioviz" data-tab="app-audioviz">Audioviz</button>
+    <button class="tab active" type="button" role="tab" aria-selected="true" aria-controls="app-303" data-tab="app-303">303 Synth</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="app-audioviz" data-tab="app-audioviz">Audioviz</button>
     <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="app-music-visualizer" data-tab="app-music-visualizer">Music Visualizer</button>
-    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="app-303" data-tab="app-303">303 Synth</button>
     <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="app-klide" data-tab="app-klide">Klide</button>
   </div>
 
-  <article class="tab-panel active" id="app-audioviz" role="tabpanel">
+  <article class="tab-panel active" id="app-303" role="tabpanel">
+    <p class="repo-meta">Davai / JUCE 8 / C++20 / acid synthesizer</p>
+    <h3>Davai</h3>
+    <div class="feature-layout">
+      <div>
+        <p>
+          <strong>Davai</strong> is a synthesizer built around a
+          <strong>virtual analog filter</strong>: an emulation of the TB-303's
+          diode ladder, the squelchy, resonant heart of acid. The filter is
+          custom code, written by hand. It's solved sample by sample with
+          zero-delay feedback and nonlinear resonance, and runs at 4×
+          oversampling. Its math comes from Vadim Zavalishin's book
+          <em>The Art of VA Filter Design</em> and Will Pirkle's application
+          notes <em>Virtual Analog Diode Ladder Filter</em> (App Note 6) and
+          <em>Virtual Analog (VA) Filter Implementation and Comparisons</em>
+          (App Note 4).
+        </p>
+        <p>
+          Around the filter: oscillators, envelopes, three LFOs (including a
+          Lorenz chaos mode), a modulation matrix, an arpeggiator, a piano-roll
+          sequencer, a full effects chain, and factory presets to start from.
+          The rest of the instrument and its interface was built through a
+          careful, iterative process of AI-assisted "vibe coding": every part
+          was tried, played and refined until it felt right.
+        </p>
+        <p>
+          Davai runs as a VST3 and Audio Unit plugin on Mac, as a VST3 on
+          Windows, and as a standalone app on iPad.
+        </p>
+        <ul class="download-list">
+          <li><strong>macOS</strong> (VST3 + Audio Unit, Apple Silicon &amp; Intel)</li>
+          <li>
+            <strong>Windows</strong> (VST3, 64-bit)
+          </li>
+          <li><strong>iPad</strong> (beta, via TestFlight)</li>
+        </ul>
+        <h4 class="downloads-heading">Downloads</h4>
+        <p class="download-action">
+          <a href="davai-downloads.html">Go to the Davai downloads page</a>
+        </p>
+      </div>
+      <div class="video-embed video-embed-3x2">
+        <video controls playsinline preload="metadata" poster="assets/media/davai/Davai-demo-90s-poster.jpg">
+          <source src="assets/media/davai/Davai-demo-90s.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+    <section class="app-detail">
+      <h4>Conception</h4>
+      <h5>Where it comes from</h5>
+      <p>
+        The Roland TB-303 Bass Line came out in 1981 as a practice box for
+        guitarists, and was dropped in 1984 after about 10,000 units. A few
+        years later, Chicago producers pushed its resonant filter hard, and it
+        became the sound of acid house.
+      </p>
+      <p>
+        Davai follows the 303's circuit, using the published analysis of the
+        <strong>Devil Fish</strong>, Robin Whittle's hardware mod of the 303.
+        Where the Devil Fish manual gives a real value, Davai uses it: the
+        200 ms to 2 s filter decay, the fixed 200 ms decay on accented notes,
+        and the 22 ms slide (a 100 kΩ resistor charging a 0.22 µF capacitor).
+        Values with no source are marked as estimates in the design notes.
+      </p>
+      <p>
+        The other half of Davai's inspiration is the Novation Bass Station II,
+        a modern analog mono synth that also has a 303-style "Acid" diode
+        filter. Davai takes its broader voice architecture from it:
+      </p>
+      <ul>
+        <li><strong>Voice:</strong> two oscillators, a sub oscillator, noise and a ring modulator, mixed before the filter.</li>
+        <li><strong>Filter choice:</strong> a classic transistor ladder alongside the acid diode ladder.</li>
+        <li><strong>Osc Filter Mod:</strong> the second oscillator can modulate the filter's cutoff at audio rate, for growling, metallic tones.</li>
+        <li><strong>Signal path:</strong> Davai follows the same order, filter first, then the amplifier stage.</li>
+      </ul>
+      <p>
+        So Davai sits between the two machines: the 303's circuit and its
+        slide-and-accent phrasing, inside a richer, Bass Station-style synth
+        voice.
+      </p>
+      <h5>Environment and Tooling</h5>
+      <ul>
+        <li>Language: C++20, built with CMake and JUCE 8 (as a git submodule).</li>
+        <li>Formats: VST3 and AU on macOS, VST3 on Windows, standalone app on iPad.</li>
+        <li>Tests: JUCE unit tests run with CTest. The DSP classes are plain C++ so they can be tested on their own.</li>
+        <li>CI: GitHub Actions, with clang-format checks, build, and tests.</li>
+        <li>Installers: a signed and notarized macOS installer, and a Windows installer made with Inno Setup.</li>
+      </ul>
+    </section>
+    <section class="architecture">
+      <h4>Architecture</h4>
+      <p>
+        The sound follows the 303's own path:
+        <code>Oscillators -> Filter -> Amp envelope -> Effects</code>.
+        Each part of the original circuit has its own class:
+      </p>
+      <ul>
+        <li><code>Oscillator</code>: the 303's oscillator, one phase ramp with a saw or square output. PolyBLEP smooths the hard edges to avoid aliasing. A second oscillator, a sub oscillator, and noise are added on top.</li>
+        <li><code>TB303DiodeFilter</code>: the hand-written diode ladder filter, run at 4× oversampling. A transistor ladder is also available.</li>
+        <li><code>AttackDecayEnvelope</code>: the 303's filter envelope. Like the hardware, it ignores note-off and always finishes its decay.</li>
+        <li><code>AdsrEnvelope</code>: the amp envelope. The 303's was fixed; this one is a full ADSR with editable curves.</li>
+        <li>Accent: two separate envelopes, one boosting the volume and one sweeping the filter, as in the real circuit.</li>
+        <li><code>PitchGlide</code>: the slide between notes, modeled as the same simple RC lag as the hardware.</li>
+        <li><code>StepSequencer</code> and <code>PianoRollSequencer</code>: patterns with real accent and slide flags on each step or note. From a MIDI keyboard, accent comes from velocity and slide from playing legato.</li>
+        <li><code>LfoModulationMatrix</code> and <code>ModEnvelopeMatrix</code>: three LFOs and a modulation envelope can each drive any parameter. Their effects add up instead of overriding each other.</li>
+        <li>Effects: nine stages (two filters, saturation, distortion, chorus, delay, EQ, compressor, reverb) in an order you can change.</li>
+      </ul>
+    </section>
+  </article>
+
+  <article class="tab-panel" id="app-audioviz" role="tabpanel" hidden>
     <div class="feature-layout media-centered">
       <div>
         <p class="repo-meta">Audioviz / JUCE 8 / C++20 / audio visualization</p>
@@ -229,116 +339,6 @@ float value = clamp(
         it can later be replaced by a learned or preset-based mapper while the
         shader interface stays stable.
       </p>
-    </section>
-  </article>
-
-  <article class="tab-panel" id="app-303" role="tabpanel" hidden>
-    <p class="repo-meta">Davai / JUCE 8 / C++20 / acid synthesizer</p>
-    <h3>Davai</h3>
-    <div class="feature-layout">
-      <div>
-        <p>
-          <strong>Davai</strong> is a synthesizer built around a
-          <strong>virtual analog filter</strong>: an emulation of the TB-303's
-          diode ladder, the squelchy, resonant heart of acid. The filter is
-          custom code, written by hand. It's solved sample by sample with
-          zero-delay feedback and nonlinear resonance, and runs at 4×
-          oversampling. Its math comes from Vadim Zavalishin's book
-          <em>The Art of VA Filter Design</em> and Will Pirkle's application
-          notes <em>Virtual Analog Diode Ladder Filter</em> (App Note 6) and
-          <em>Virtual Analog (VA) Filter Implementation and Comparisons</em>
-          (App Note 4).
-        </p>
-        <p>
-          Around the filter: oscillators, envelopes, three LFOs (including a
-          Lorenz chaos mode), a modulation matrix, an arpeggiator, a piano-roll
-          sequencer, a full effects chain, and factory presets to start from.
-          The rest of the instrument and its interface was built through a
-          careful, iterative process of AI-assisted "vibe coding": every part
-          was tried, played and refined until it felt right.
-        </p>
-        <p>
-          Davai runs as a VST3 and Audio Unit plugin on Mac, as a VST3 on
-          Windows, and as a standalone app on iPad.
-        </p>
-        <ul class="download-list">
-          <li><strong>macOS</strong> (VST3 + Audio Unit, Apple Silicon &amp; Intel)</li>
-          <li>
-            <strong>Windows</strong> (VST3, 64-bit)
-          </li>
-          <li><strong>iPad</strong> (beta, via TestFlight)</li>
-        </ul>
-        <h4 class="downloads-heading">Downloads</h4>
-        <p class="download-action">
-          <a href="davai-downloads.html">Go to the Davai downloads page</a>
-        </p>
-      </div>
-      <div class="video-embed video-embed-3x2">
-        <video controls playsinline preload="metadata" poster="assets/media/davai/Davai-demo-90s-poster.jpg">
-          <source src="assets/media/davai/Davai-demo-90s.mp4" type="video/mp4">
-        </video>
-      </div>
-    </div>
-    <section class="app-detail">
-      <h4>Conception</h4>
-      <h5>Where it comes from</h5>
-      <p>
-        The Roland TB-303 Bass Line came out in 1981 as a practice box for
-        guitarists, and was dropped in 1984 after about 10,000 units. A few
-        years later, Chicago producers pushed its resonant filter hard, and it
-        became the sound of acid house.
-      </p>
-      <p>
-        Davai follows the 303's circuit, using the published analysis of the
-        <strong>Devil Fish</strong>, Robin Whittle's hardware mod of the 303.
-        Where the Devil Fish manual gives a real value, Davai uses it: the
-        200 ms to 2 s filter decay, the fixed 200 ms decay on accented notes,
-        and the 22 ms slide (a 100 kΩ resistor charging a 0.22 µF capacitor).
-        Values with no source are marked as estimates in the design notes.
-      </p>
-      <p>
-        The other half of Davai's inspiration is the Novation Bass Station II,
-        a modern analog mono synth that also has a 303-style "Acid" diode
-        filter. Davai takes its broader voice architecture from it:
-      </p>
-      <ul>
-        <li><strong>Voice:</strong> two oscillators, a sub oscillator, noise and a ring modulator, mixed before the filter.</li>
-        <li><strong>Filter choice:</strong> a classic transistor ladder alongside the acid diode ladder.</li>
-        <li><strong>Osc Filter Mod:</strong> the second oscillator can modulate the filter's cutoff at audio rate, for growling, metallic tones.</li>
-        <li><strong>Signal path:</strong> Davai follows the same order, filter first, then the amplifier stage.</li>
-      </ul>
-      <p>
-        So Davai sits between the two machines: the 303's circuit and its
-        slide-and-accent phrasing, inside a richer, Bass Station-style synth
-        voice.
-      </p>
-      <h5>Environment and Tooling</h5>
-      <ul>
-        <li>Language: C++20, built with CMake and JUCE 8 (as a git submodule).</li>
-        <li>Formats: VST3 and AU on macOS, VST3 on Windows, standalone app on iPad.</li>
-        <li>Tests: JUCE unit tests run with CTest. The DSP classes are plain C++ so they can be tested on their own.</li>
-        <li>CI: GitHub Actions, with clang-format checks, build, and tests.</li>
-        <li>Installers: a signed and notarized macOS installer, and a Windows installer made with Inno Setup.</li>
-      </ul>
-    </section>
-    <section class="architecture">
-      <h4>Architecture</h4>
-      <p>
-        The sound follows the 303's own path:
-        <code>Oscillators -> Filter -> Amp envelope -> Effects</code>.
-        Each part of the original circuit has its own class:
-      </p>
-      <ul>
-        <li><code>Oscillator</code>: the 303's oscillator, one phase ramp with a saw or square output. PolyBLEP smooths the hard edges to avoid aliasing. A second oscillator, a sub oscillator, and noise are added on top.</li>
-        <li><code>TB303DiodeFilter</code>: the hand-written diode ladder filter, run at 4× oversampling. A transistor ladder is also available.</li>
-        <li><code>AttackDecayEnvelope</code>: the 303's filter envelope. Like the hardware, it ignores note-off and always finishes its decay.</li>
-        <li><code>AdsrEnvelope</code>: the amp envelope. The 303's was fixed; this one is a full ADSR with editable curves.</li>
-        <li>Accent: two separate envelopes, one boosting the volume and one sweeping the filter, as in the real circuit.</li>
-        <li><code>PitchGlide</code>: the slide between notes, modeled as the same simple RC lag as the hardware.</li>
-        <li><code>StepSequencer</code> and <code>PianoRollSequencer</code>: patterns with real accent and slide flags on each step or note. From a MIDI keyboard, accent comes from velocity and slide from playing legato.</li>
-        <li><code>LfoModulationMatrix</code> and <code>ModEnvelopeMatrix</code>: three LFOs and a modulation envelope can each drive any parameter. Their effects add up instead of overriding each other.</li>
-        <li>Effects: nine stages (two filters, saturation, distortion, chorus, delay, EQ, compressor, reverb) in an order you can change.</li>
-      </ul>
     </section>
   </article>
 
