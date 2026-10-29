@@ -421,8 +421,7 @@ build_string(level, reverse);</code></pre>
   <article class="tab-panel" id="app-visual-api" role="tabpanel" hidden>
     <p class="repo-meta">visualAPI / Python 3.14 / ModernGL / GLSL / generative visuals</p>
     <h3>Visual API</h3>
-    <div class="feature-layout">
-      <div>
+    <div class="intro-text">
         <p>
           Visual API turns my archive of Processing sketches into a Python
           library of real-time visuals. Each sketch becomes a Python object
@@ -445,11 +444,35 @@ build_string(level, reverse);</code></pre>
           in a window or fullscreen, and can record a full cycle to an MP4
           movie.
         </p>
-      </div>
-      <div class="media-placeholder">
-        <span>Visual API gallery image</span>
-      </div>
     </div>
+    <section class="media-gallery" aria-label="Visual API gallery">
+      <figure>
+        <video class="gallery-video" muted loop playsinline controls preload="none" poster="assets/media/visual-api/Lenia-poster.jpg">
+          <source src="assets/media/visual-api/Lenia.mp4" type="video/mp4">
+        </video>
+        <figcaption><strong>Lenia</strong> · a continuous cellular automaton growing from a small seed</figcaption>
+      </figure>
+      <figure>
+        <video class="gallery-video" muted loop playsinline controls preload="none" poster="assets/media/visual-api/AWave-poster.jpg">
+          <source src="assets/media/visual-api/AWave.mp4" type="video/mp4">
+        </video>
+        <figcaption><strong>AWave</strong> · a 3D surface of cubes riding a moving wave</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/media/visual-api/circlesFXRain.jpg" alt="circlesFXRain visual" loading="lazy" width="1600" height="1000">
+        <figcaption><strong>circlesFXRain</strong> · ripples of light falling like rain</figcaption>
+      </figure>
+      <figure>
+        <video class="gallery-video" muted loop playsinline controls preload="none" poster="assets/media/visual-api/RipplesDec2024-poster.jpg">
+          <source src="assets/media/visual-api/RipplesDec2024.mp4" type="video/mp4">
+        </video>
+        <figcaption><strong>RipplesDec2024</strong> · a photo disturbed by water-like ripples</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/media/visual-api/FloatingCirclesWithLines.jpg" alt="FloatingCirclesWithLines visual" loading="lazy" width="1600" height="1000">
+        <figcaption><strong>FloatingCirclesWithLines</strong> · drifting circles joined by lines</figcaption>
+      </figure>
+    </section>
     <section class="app-detail">
       <h4>Conception</h4>
       <h5>Approach</h5>
@@ -538,6 +561,18 @@ build_string(level, reverse);</code></pre>
 
   showTabFromHash();
   window.addEventListener("hashchange", showTabFromHash);
+
+  // Gallery videos play, muted and looping, only while visible
+  const galleryObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.play().catch(() => {});
+      } else {
+        entry.target.pause();
+      }
+    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll(".gallery-video").forEach(video => galleryObserver.observe(video));
 
   const copyIcon = `
     <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
