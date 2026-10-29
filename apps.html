@@ -32,6 +32,7 @@
     <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="app-audioviz" data-tab="app-audioviz">Audioviz</button>
     <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="app-music-visualizer" data-tab="app-music-visualizer">Music Visualizer</button>
     <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="app-klide" data-tab="app-klide">Klide</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="app-visual-api" data-tab="app-visual-api">Visual API</button>
   </div>
 
   <article class="tab-panel active" id="app-303" role="tabpanel">
@@ -414,6 +415,84 @@ build_string(level, reverse);</code></pre>
         valuable core idea, and isolating it would make the app testable,
         easier to extend, and easier to port to the modern JUCE/CMake structure.
       </p>
+    </section>
+  </article>
+
+  <article class="tab-panel" id="app-visual-api" role="tabpanel" hidden>
+    <p class="repo-meta">visualAPI / Python 3.14 / ModernGL / GLSL / generative visuals</p>
+    <h3>Visual API</h3>
+    <div class="feature-layout">
+      <div>
+        <p>
+          Visual API turns my archive of Processing sketches into a Python
+          library of real-time visuals. Each sketch becomes a Python object
+          that can be listed, searched and launched in one line, like
+          <code>visualAPI.BlackHole1(seconds=30)</code>, and is drawn on the
+          GPU with ModernGL and GLSL shaders.
+        </p>
+        <p>
+          The archive holds 250 sketches, and every one of them is in the
+          catalog from the start. So far 67 have been ported, family by
+          family: particle orbits, 3D wave surfaces, image ripples, mountains,
+          lit oyster shells and circle compositions. There are also 7 original
+          visuals with no Processing source: cellular automata (Conway's Life,
+          HighLife, Seeds, Bloom and the continuous Lenia) and AImmune, an
+          audio-reactive immune-system simulation that grows a
+          reaction-diffusion pattern.
+        </p>
+        <p>
+          A gallery mode plays the visuals one after another with crossfades,
+          in a window or fullscreen, and can record a full cycle to an MP4
+          movie.
+        </p>
+      </div>
+      <div class="media-placeholder">
+        <span>Visual API gallery image</span>
+      </div>
+    </div>
+    <section class="app-detail">
+      <h4>Conception</h4>
+      <h5>Approach</h5>
+      <p>
+        The project starts with a catalog, not with automatic translation.
+        Every sketch gets a stable name built from its folder path, so two
+        sketches with the same name in different folders never clash. A
+        sketch that isn't ported yet still exists as an object, and says
+        clearly that it isn't ready when you try to draw it.
+      </p>
+      <p>
+        Sketches are then ported one family at a time. Close variants share
+        one engine (for example, one ripple engine drives all the
+        <code>circlesFX</code> sketches), and each keeps its own launcher.
+        The port keeps Processing's way of thinking where it helps
+        (<code>setup</code>, <code>draw</code>, frame count, mouse) and moves
+        the work to the GPU where that is clearer. Each porting choice is
+        written down in a short decision record.
+      </p>
+      <h5>Environment and Tooling</h5>
+      <ul>
+        <li>Language: Python 3.14, in a Conda environment.</li>
+        <li>Libraries: NumPy, ModernGL, GLFW, GLSL shaders and Pillow, with ffmpeg for movie export.</li>
+        <li>Tests and quality: pytest, Ruff and strict mypy. The tests never open a GPU window, so they run anywhere.</li>
+        <li>CI: GitHub Actions running Ruff format and lint checks, mypy and pytest.</li>
+      </ul>
+    </section>
+    <section class="architecture">
+      <h4>Architecture</h4>
+      <p>
+        <code>Processing archive -> Discovery -> Catalog -> Visual objects -> OpenGL runner</code>.
+        Finding sketches, describing them and drawing them are kept separate,
+        so a visual can be tested without scanning the archive, and the
+        archive can be scanned without opening a window.
+      </p>
+      <ul>
+        <li><code>src/processing</code>: finds every <code>.pde</code> file and gives it a stable name.</li>
+        <li><code>src/visuals/registry.py</code>: the catalog, with one entry per sketch plus the original visuals.</li>
+        <li><code>src/visuals/&lt;family&gt;</code>: the ported visuals, grouped by family, on shared building blocks such as feedback buffers, lit 3D meshes and canvas textures.</li>
+        <li><code>src/renderer</code>: opens the window, runs each visual's <code>setup</code> and <code>draw</code>, passes mouse input, and runs the gallery.</li>
+        <li><code>shaders</code>: the GLSL code, one folder per family.</li>
+        <li><code>visualAPI</code>: the public package: list, search, run, and one launcher per visual.</li>
+      </ul>
     </section>
   </article>
 </section>
