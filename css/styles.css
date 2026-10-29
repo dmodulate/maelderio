@@ -1031,3 +1031,33 @@ pre code {
 .art-gallery.square video {
   aspect-ratio: 1 / 1;
 }
+
+.exhibition-gallery {
+  column-gap: 16px;
+  columns: 3 280px;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.exhibition-gallery figure {
+  break-inside: avoid;
+  margin: 0 0 16px;
+}
+
+.exhibition-gallery a {
+  display: block;
+  margin: 0;
+}
+
+.exhibition-gallery img {
+  border: 1px solid #242424;
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+.exhibition-gallery figcaption {
+  color: #999;
+  font-size: 13px;
+  margin-top: 6px;
+}
