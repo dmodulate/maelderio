@@ -993,3 +993,36 @@ pre code {
   color: #eaeaea;
   font-weight: 600;
 }
+
+.art-technique {
+  border-top: 1px solid #222;
+  margin-top: 24px;
+  padding-top: 20px;
+}
+
+.art-technique h4 {
+  color: #fff;
+  font-size: 18px;
+  margin: 0 0 10px;
+}
+
+.art-technique p {
+  margin: 0 0 16px;
+}
+
+.art-gallery.cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: none;
+}
+
+@media (max-width: 960px) {
+  .art-gallery.cols-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .art-gallery.cols-3 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Art - Maël Derio</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -27,21 +28,208 @@
     <h2>Art</h2>
   </div>
 
-  <div class="tabs" role="tablist" aria-label="Processing projects">
-    <button class="tab active" type="button" role="tab" aria-selected="true" aria-controls="art-invert" data-tab="art-invert">InvertUnderstanding</button>
-    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="art-load-save" data-tab="art-load-save">Load And Save Params</button>
+  <div class="tabs" role="tablist" aria-label="Art projects">
+    <button class="tab active" type="button" role="tab" aria-selected="true" aria-controls="art-visual-api" data-tab="art-visual-api">Visual API</button>
   </div>
 
-  <article class="tab-panel active" id="art-invert" role="tabpanel">
-    <h3>InvertUnderstanding</h3>
-    <p>A Processing sketch from the UnderstandCircles project group, with image and data folders. This belongs to the visual-research side of the portfolio: parameterized systems, geometric exploration, and interactive visual composition.</p>
-    <div class="media-placeholder"><span>Processing artwork still</span></div>
-  </article>
+  <article class="tab-panel active" id="art-visual-api" role="tabpanel">
+    <p class="repo-meta">Generative visuals / real-time / GPU</p>
+    <h3>Visual API</h3>
+    <div class="intro-text">
+      <p>
+        My archive holds 250 small generative pieces written in Processing:
+        orbits, waves, ripples, ridgelines, rings, shells and layered
+        textures. Visual API brings them back as real-time pieces running on
+        the graphics card, so they can be played again, full screen, one
+        after another with crossfades, like a visual set.
+      </p>
+      <p>
+        Most of them are not fixed images but small systems: a few rules, a
+        little randomness or noise, and time. What you see is what those
+        rules produce, frame after frame, so a piece never plays exactly the
+        same way twice. Alongside the archive, a few new pieces explore
+        emergence: patterns that nobody draws, which grow out of simple rules.
+      </p>
+      <p>
+        Every video and image below was recorded straight from Visual API.
+      </p>
+    </div>
 
-  <article class="tab-panel" id="art-load-save" role="tabpanel" hidden>
-    <h3>UnderstandCirclesLoadAndSaveParams</h3>
-    <p>A companion Processing sketch focused on preserving parameter states. This is useful for turning live visual exploration into repeatable compositions.</p>
-    <div class="media-placeholder"><span>Parameter study image</span></div>
+      <section class="art-technique">
+        <h4>Trails and orbits</h4>
+        <p>Lines circle a dark centre, like matter around a black hole. Instead of clearing the screen, each frame lays a very faint black veil over the last one, so every movement leaves a fading trail. The image becomes the memory of the motion.</p>
+        <div class="media-gallery art-gallery cols-2">
+        <figure>
+          <video class="gallery-video" muted loop playsinline controls preload="none" poster="assets/media/art/BlackHole1-poster.jpg">
+            <source src="assets/media/art/BlackHole1.mp4" type="video/mp4">
+          </video>
+          <figcaption><strong>BlackHole1</strong> · orbiting lines leaving trails around a dark core</figcaption>
+        </figure>
+        <figure>
+          <video class="gallery-video" muted loop playsinline controls preload="none" poster="assets/media/art/LongCurvedLinesBH-poster.jpg">
+            <source src="assets/media/art/LongCurvedLinesBH.mp4" type="video/mp4">
+          </video>
+          <figcaption><strong>LongCurvedLinesBH</strong> · long curved arcs braided into a ring</figcaption>
+        </figure>
+        </div>
+      </section>
+
+      <section class="art-technique">
+        <h4>Wave surfaces</h4>
+        <p>Hundreds of cubes form a surface that sine and cosine waves lift and fold. The camera does the rest: it turns around the surface, flies through it or rushes forward. Some variants move to a beat.</p>
+        <div class="media-gallery art-gallery cols-3">
+        <figure>
+          <video class="gallery-video" muted loop playsinline controls preload="none" poster="assets/media/visual-api/AWave-poster.jpg">
+            <source src="assets/media/visual-api/AWave.mp4" type="video/mp4">
+          </video>
+          <figcaption><strong>AWave</strong> · a surface of cubes riding a moving wave</figcaption>
+        </figure>
+        <figure>
+          <video class="gallery-video" muted loop playsinline controls preload="none" poster="assets/media/art/CoolRotations-poster.jpg">
+            <source src="assets/media/art/CoolRotations.mp4" type="video/mp4">
+          </video>
+          <figcaption><strong>CoolRotations</strong> · the camera turning around a wall of cubes</figcaption>
+        </figure>
+        <figure>
+          <video class="gallery-video" muted loop playsinline controls preload="none" poster="assets/media/art/MoreMovementsInColors-poster.jpg">
+            <source src="assets/media/art/MoreMovementsInColors.mp4" type="video/mp4">
+          </video>
+          <figcaption><strong>MoreMovementsInColors</strong> · coloured cubes pulsing to a beat</figcaption>
+        </figure>
+        </div>
+      </section>
+
+      <section class="art-technique">
+        <h4>Water ripples</h4>
+        <p>A simulated water surface: each point remembers its last two heights and passes the wave on to its neighbours, with a little damping so ripples die out. The water bends an image lying underneath, like looking through a pond. Drops fall as rain, on a grid, or along moving stripes.</p>
+        <div class="media-gallery art-gallery cols-3">
+        <figure>
+          <video class="gallery-video" muted loop playsinline controls preload="none" poster="assets/media/visual-api/circlesFXRain-poster.jpg">
+            <source src="assets/media/visual-api/circlesFXRain.mp4" type="video/mp4">
+          </video>
+          <figcaption><strong>circlesFXRain</strong> · ripples of light falling like rain</figcaption>
+        </figure>
+        <figure>
+          <video class="gallery-video" muted loop playsinline controls preload="none" poster="assets/media/art/circlesFX2-poster.jpg">
+            <source src="assets/media/art/circlesFX2.mp4" type="video/mp4">
+          </video>
+          <figcaption><strong>circlesFX2</strong> · a grid of drops disturbing glowing rings</figcaption>
+        </figure>
+        <figure>
+          <video class="gallery-video" muted loop playsinline controls preload="none" poster="assets/media/art/circlesFXTurnado-poster.jpg">
+            <source src="assets/media/art/circlesFXTurnado.mp4" type="video/mp4">
+          </video>
+          <figcaption><strong>circlesFXTurnado</strong> · drops travelling along stripes of a rainbow image</figcaption>
+        </figure>
+        </div>
+      </section>
+
+      <section class="art-technique">
+        <h4>Noise landscapes</h4>
+        <p>Mountain ridges drawn from layered noise: smooth randomness added at several scales, which is how real relief looks. The ridges are stacked in layers, or wrapped around a circle that keeps reshaping itself.</p>
+        <div class="media-gallery art-gallery cols-2">
+        <figure>
+          <img src="assets/media/art/BlueMountains.jpg" alt="BlueMountains, a still from Visual API" loading="lazy" width="1280" height="800">
+          <figcaption><strong>BlueMountains</strong> · stacked ridges in shades of blue</figcaption>
+        </figure>
+        <figure>
+          <video class="gallery-video" muted loop playsinline controls preload="none" poster="assets/media/art/CircleMountains-poster.jpg">
+            <source src="assets/media/art/CircleMountains.mp4" type="video/mp4">
+          </video>
+          <figcaption><strong>CircleMountains</strong> · a mountain range wrapped around a circle</figcaption>
+        </figure>
+        </div>
+      </section>
+
+      <section class="art-technique">
+        <h4>Rings and echoes</h4>
+        <p>Circles grow out of single points and pile up into rings, like grooves on a vinyl record or ripples on a lake. Older rings fade slowly, so the picture is always a mix of now and a moment ago.</p>
+        <div class="media-gallery art-gallery cols-2">
+        <figure>
+          <video class="gallery-video" muted loop playsinline controls preload="none" poster="assets/media/visual-api/FloatingCirclesWithLines-poster.jpg">
+            <source src="assets/media/visual-api/FloatingCirclesWithLines.mp4" type="video/mp4">
+          </video>
+          <figcaption><strong>FloatingCirclesWithLines</strong> · drifting circles joined by lines</figcaption>
+        </figure>
+        <figure>
+          <video class="gallery-video" muted loop playsinline controls preload="none" poster="assets/media/art/Vynil2-poster.jpg">
+            <source src="assets/media/art/Vynil2.mp4" type="video/mp4">
+          </video>
+          <figcaption><strong>Vynil2</strong> · concentric grooves, like records</figcaption>
+        </figure>
+        <figure>
+          <video class="gallery-video" muted loop playsinline controls preload="none" poster="assets/media/art/ColorVariant-poster.jpg">
+            <source src="assets/media/art/ColorVariant.mp4" type="video/mp4">
+          </video>
+          <figcaption><strong>ColorVariant</strong> · the same rings in shifting colours</figcaption>
+        </figure>
+        <figure>
+          <video class="gallery-video" muted loop playsinline controls preload="none" poster="assets/media/art/beautifulConcentric-poster.jpg">
+            <source src="assets/media/art/beautifulConcentric.mp4" type="video/mp4">
+          </video>
+          <figcaption><strong>beautifulConcentric</strong> · overlapping concentric discs</figcaption>
+        </figure>
+        </div>
+      </section>
+
+      <section class="art-technique">
+        <h4>Shells and nacre</h4>
+        <p>Shells built as 3D surfaces and lit softly, and rings of colour that follow the bands of mother-of-pearl.</p>
+        <div class="media-gallery art-gallery cols-2">
+        <figure>
+          <img src="assets/media/art/BrightPerlescantOysters.jpg" alt="BrightPerlescantOysters, a still from Visual API" loading="lazy" width="1280" height="800">
+          <figcaption><strong>BrightPerlescantOysters</strong> · a softly lit 3D shell</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/media/art/LavenderOysters.jpg" alt="LavenderOysters, a still from Visual API" loading="lazy" width="1280" height="800">
+          <figcaption><strong>LavenderOysters</strong> · wavy nacre rings in one composition</figcaption>
+        </figure>
+        </div>
+      </section>
+
+      <section class="art-technique">
+        <h4>Layered circles</h4>
+        <p>Each of these is a single still image. Circles are stamped again and again, each time slightly shifted and almost transparent, colour after colour. Their edges turn into grainy rings, somewhere between nacre, tree rings and watercolour.</p>
+        <div class="media-gallery art-gallery cols-3">
+        <figure>
+          <img src="assets/media/art/NacreUnderstanding.jpg" alt="NacreUnderstanding, a still from Visual API" loading="lazy" width="1280" height="800">
+          <figcaption><strong>NacreUnderstanding</strong> · a column of rings in nacre colours</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/media/art/FilledNacreUnderstanding.jpg" alt="FilledNacreUnderstanding, a still from Visual API" loading="lazy" width="1280" height="800">
+          <figcaption><strong>FilledNacreUnderstanding</strong> · filled discs on white</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/media/art/PlacedUnderstanding.jpg" alt="PlacedUnderstanding, a still from Visual API" loading="lazy" width="1280" height="800">
+          <figcaption><strong>PlacedUnderstanding</strong> · two placed discs on green</figcaption>
+        </figure>
+        </div>
+      </section>
+
+      <section class="art-technique">
+        <h4>Emergence</h4>
+        <p>Here nothing is drawn directly. Each cell follows simple rules about its neighbours, and shapes appear on their own: Conway's Game of Life flickers and swarms, Lenia grows like a soft organism. AImmune simulates a tiny immune system (cells hunting antigens, cloning, dying), and its activity feeds a reaction-diffusion pattern, the kind of chemistry behind animal spots and stripes. It can listen to a microphone and react to music.</p>
+        <div class="media-gallery art-gallery cols-3">
+        <figure>
+          <video class="gallery-video" muted loop playsinline controls preload="none" poster="assets/media/visual-api/Lenia-poster.jpg">
+            <source src="assets/media/visual-api/Lenia.mp4" type="video/mp4">
+          </video>
+          <figcaption><strong>Lenia</strong> · a continuous cellular automaton growing from a small seed</figcaption>
+        </figure>
+        <figure>
+          <video class="gallery-video" muted loop playsinline controls preload="none" poster="assets/media/art/ConwayLife-poster.jpg">
+            <source src="assets/media/art/ConwayLife.mp4" type="video/mp4">
+          </video>
+          <figcaption><strong>ConwayLife</strong> · Conway's Game of Life on a large grid</figcaption>
+        </figure>
+        <figure>
+          <video class="gallery-video" muted loop playsinline controls preload="none" poster="assets/media/art/AImmune-poster.jpg">
+            <source src="assets/media/art/AImmune.mp4" type="video/mp4">
+          </video>
+          <figcaption><strong>AImmune</strong> · an immune system growing a reaction-diffusion pattern</figcaption>
+        </figure>
+        </div>
+      </section>
   </article>
 </section>
 </main>
@@ -69,6 +257,18 @@
       selectedPanel.hidden = false;
     });
   });
+
+  // Gallery videos play, muted and looping, only while visible
+  const galleryObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.play().catch(() => {});
+      } else {
+        entry.target.pause();
+      }
+    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll(".gallery-video").forEach(video => galleryObserver.observe(video));
 </script>
 
 </body>
