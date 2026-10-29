@@ -1026,3 +1026,7 @@ pre code {
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+.art-gallery.square img {
+  aspect-ratio: 1 / 1;
+}
