@@ -1027,6 +1027,7 @@ pre code {
   }
 }
 
-.art-gallery.square img {
+.art-gallery.square img,
+.art-gallery.square video {
   aspect-ratio: 1 / 1;
 }
