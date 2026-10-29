@@ -1033,15 +1033,15 @@ pre code {
 }
 
 .exhibition-gallery {
-  column-gap: 16px;
-  columns: 3 280px;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 840px;
 }
 
 .exhibition-gallery figure {
-  break-inside: avoid;
-  margin: 0 0 16px;
+  margin: 0;
 }
 
 .exhibition-gallery a {
@@ -1050,10 +1050,19 @@ pre code {
 }
 
 .exhibition-gallery img {
+  aspect-ratio: 1 / 1;
+  background: #111;
   border: 1px solid #242424;
   display: block;
   height: auto;
+  object-fit: contain;
   width: 100%;
+}
+
+@media (max-width: 600px) {
+  .exhibition-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .exhibition-gallery figcaption {
