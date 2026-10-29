@@ -956,14 +956,9 @@ pre code {
 .media-gallery {
   display: grid;
   gap: 16px;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   margin: 0 0 24px;
-}
-
-@media (max-width: 960px) {
-  .media-gallery {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+  max-width: 1080px;
 }
 
 @media (max-width: 600px) {
