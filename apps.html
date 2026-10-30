@@ -266,23 +266,6 @@
     </section>
     <section class="app-detail">
       <h4>Conception</h4>
-      <h5>Approach</h5>
-      <p>
-        The project starts with a catalog, not with automatic translation.
-        Every sketch gets a stable name built from its folder path, so two
-        sketches with the same name in different folders never clash. A
-        sketch that isn't ported yet still exists as an object, and says
-        clearly that it isn't ready when you try to draw it.
-      </p>
-      <p>
-        Sketches are then ported one family at a time. Close variants share
-        one engine (for example, one ripple engine drives all the
-        <code>circlesFX</code> sketches), and each keeps its own launcher.
-        The port keeps Processing's way of thinking where it helps
-        (<code>setup</code>, <code>draw</code>, frame count, mouse) and moves
-        the work to the GPU where that is clearer. Each porting choice is
-        written down in a short decision record.
-      </p>
       <h5>Environment and Tooling</h5>
       <ul>
         <li>Language: Python 3.14, in a Conda environment.</li>
