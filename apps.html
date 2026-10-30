@@ -156,7 +156,7 @@
         </p>
         <p>
           The core challenge is keeping the audio thread safe while the UI
-          remains fluid. Incoming samples are written into real-time friendly
+          remains fluid. Incoming samples are written into real-time
           history buffers, then copied into stable snapshots for drawing so the
           visual layer can stay responsive without blocking audio processing.
         </p>
@@ -172,9 +172,9 @@
       <h5>Environment and Tooling</h5>
       <p>
         Built as a modern JUCE audio project in C++20, using CMake 3.22 and a
-        JUCE submodule. The CMake project defines versioned build information,
-        shared sources for plugin and standalone targets, optional ccache, and
-        test discovery through CTest.
+        JUCE submodule, coded both by hand and with AI assistance. The CMake project
+        defines versioned build information, shared sources for plugin and standalone targets,
+        optional ccache, and test discovery through CTest.
       </p>
       <ul>
         <li>Language: C++20, with extensions disabled.</li>
