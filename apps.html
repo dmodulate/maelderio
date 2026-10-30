@@ -312,6 +312,44 @@
     </div>
     <section class="app-detail">
       <h4>Conception</h4>
+      <h5>Listening to the music</h5>
+      <p>
+        Many times per second, the engine takes a short window of the incoming
+        sound and measures a few simple things about it:
+      </p>
+      <ul>
+        <li><strong>Loudness</strong> (RMS): how strong the sound is overall.</li>
+        <li><strong>Bass, mids and highs</strong>: how much energy sits in the low (20–250 Hz), middle (250 Hz–4 kHz) and high (4–20 kHz) frequencies.</li>
+        <li><strong>Brightness</strong> (spectral centroid): whether the sound leans dark or bright.</li>
+        <li><strong>Onset</strong>: a sudden rise in volume, like the start of a note or a hit.</li>
+        <li><strong>Kick</strong>: a sudden rise in the bass, to catch the kick drum.</li>
+      </ul>
+      <p>
+        These values are smoothed over time: they rise fast and fall slowly,
+        so the image reacts at once but doesn't flicker. The kick gets its own
+        envelope, so each hit gives a clear punch.
+      </p>
+      <h5>From sound to image</h5>
+      <p>
+        The features are then mixed into eight visual parameters, each one
+        driven by a few features:
+      </p>
+      <ul>
+        <li><strong>Scale</strong> (bass and kick): the shape swells with the low end.</li>
+        <li><strong>Deformation</strong> (bass and kick): how much the shape bends and flows.</li>
+        <li><strong>Pulse</strong> (kick, loudness and onsets): the beat of the image.</li>
+        <li><strong>Intensity</strong> (loudness, mids and kick): how much is going on.</li>
+        <li><strong>Hue</strong> (brightness and highs): the color drifts with the timbre.</li>
+        <li><strong>Detail</strong> (highs and mids): fine texture and sparks.</li>
+        <li><strong>Flash</strong> (kick and onsets): a burst of light on each hit.</li>
+        <li><strong>Kick</strong>: passed straight through for shockwaves and bursts.</li>
+      </ul>
+      <p>
+        Each shader reads the same parameters in its own way. The particle
+        shader turns them into bursts and sparks, the fluid shader into
+        pressure and flow. A playlist can crossfade between shaders while the
+        music plays, as in the video above.
+      </p>
       <h5>Environment and Tooling</h5>
       <p>
         Built as a Python audio-visual engine with a Conda environment and a
@@ -327,45 +365,6 @@
         <li>CI: GitHub Actions on macOS running Conda setup, Ruff format check, Ruff lint, mypy, and pytest.</li>
       </ul>
     </section>
-    <div class="split-code">
-      <div class="code-explainer">
-        <h4>Code snippet</h4>
-        <pre><code>def compute_kick(signal, sample_rate):
-    split = signal.size // 2
-    previous_bass = compute_frequency_bands(
-        signal[:split], sample_rate)["bass"]
-    current_bass = compute_frequency_bands(
-        signal[split:], sample_rate)["bass"]
-
-    growth = max(0.0, current_bass - previous_bass)
-    kick = current_bass * 0.65 + growth * 0.35
-    return float(np.clip(kick, 0.0, 1.0))</code></pre>
-        <p>
-          This feature estimates a kick by combining current bass energy with
-          low-frequency growth between the first and second half of the audio
-          window.
-        </p>
-      </div>
-      <div class="code-explainer">
-        <h4>Code snippet</h4>
-        <pre><code>float kick = clamp(u_kick, 0.0, 1.0);
-float body_radius = 0.28 + bass_body * 0.34;
-float shell = 1.0 - smoothstep(
-    0.018, 0.12, abs(radius - burst_radius));
-
-float value = clamp(
-    body * 0.30
-    + shell * (kick * 0.35 + flash * 0.18)
-    + burst
-    + afterglow,
-    0.0, 1.0);</code></pre>
-        <p>
-          The shader turns audio features into visible structure: bass inflates
-          the body, kick expands a shell, highs add detail, and flash brightens
-          the transient.
-        </p>
-      </div>
-    </div>
     <section class="architecture">
       <h4>Architecture</h4>
       <p>
@@ -392,7 +391,7 @@ float value = clamp(
   <article class="tab-panel" id="app-other" role="tabpanel" hidden>
     <h3>Other</h3>
     <div class="intro-text">
-      <p>Other projects I have worked on, from open-source audio plugins to research and live visuals.</p>
+      <p>Other projects I have worked on</p>
     </div>
     <div class="subprojects">
       <section>
@@ -419,11 +418,6 @@ float value = clamp(
         <h4>Detecting language troubles in infants</h4>
         <p class="repo-meta">PhD research, Université Pierre et Marie Curie, 2006 - 2009</p>
         <p>Audio and speech processing research on automatically detecting language troubles in infants.</p>
-      </section>
-      <section>
-        <h4>Interactive visuals and events</h4>
-        <p class="repo-meta">Art and tattoo business, 2018 - 2022</p>
-        <p>Alongside designing digital art and performing electronic music, I organised events and created interactive visuals with Node.js and Processing.</p>
       </section>
     </div>
   </article>
