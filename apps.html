@@ -168,8 +168,7 @@
       </div>
     </div>
     <section class="app-detail">
-      <h4>Conception</h4>
-      <h5>Environment and Tooling</h5>
+      <h4>Environment and Tooling</h4>
       <p>
         Built as a modern JUCE audio project in C++20, using CMake 3.22 and a
         JUCE submodule, coded both by hand and with AI assistance. The CMake project
@@ -265,30 +264,12 @@
       </figure>
     </section>
     <section class="app-detail">
-      <h4>Conception</h4>
-      <h5>Environment and Tooling</h5>
+      <h4>Environment and Tooling</h4>
       <ul>
         <li>Language: Python 3.14, in a Conda environment.</li>
         <li>Libraries: NumPy, ModernGL, GLFW, GLSL shaders and Pillow, with ffmpeg for movie export.</li>
         <li>Tests and quality: pytest, Ruff and strict mypy. The tests never open a GPU window, so they run anywhere.</li>
         <li>CI: GitHub Actions running Ruff format and lint checks, mypy and pytest.</li>
-      </ul>
-    </section>
-    <section class="architecture">
-      <h4>Architecture</h4>
-      <p>
-        <code>Processing archive -> Discovery -> Catalog -> Visual objects -> OpenGL runner</code>.
-        Finding sketches, describing them and drawing them are kept separate,
-        so a visual can be tested without scanning the archive, and the
-        archive can be scanned without opening a window.
-      </p>
-      <ul>
-        <li><code>src/processing</code>: finds every <code>.pde</code> file and gives it a stable name.</li>
-        <li><code>src/visuals/registry.py</code>: the catalog, with one entry per sketch plus the original visuals.</li>
-        <li><code>src/visuals/&lt;family&gt;</code>: the ported visuals, grouped by family, on shared building blocks such as feedback buffers, lit 3D meshes and canvas textures.</li>
-        <li><code>src/renderer</code>: opens the window, runs each visual's <code>setup</code> and <code>draw</code>, passes mouse input, and runs the gallery.</li>
-        <li><code>shaders</code>: the GLSL code, one folder per family.</li>
-        <li><code>visualAPI</code>: the public package: list, search, run, and one launcher per visual.</li>
       </ul>
     </section>
   </article>
@@ -364,27 +345,6 @@
         <li>Testing and quality: pytest tests, Ruff format/lint, and strict mypy options.</li>
         <li>CI: GitHub Actions on macOS running Conda setup, Ruff format check, Ruff lint, mypy, and pytest.</li>
       </ul>
-    </section>
-    <section class="architecture">
-      <h4>Architecture</h4>
-      <p>
-        The project is organized as a pipeline:
-        <code>Live Audio -> Audio Engine -> Feature Extraction -> Feature Mapping -> Visual Parameters -> ModernGL Renderer -> GLSL Shaders -> Display</code>.
-        Each step has a narrow responsibility, which makes the visual behavior
-        easier to tune without rewriting capture or rendering code.
-      </p>
-      <ul>
-        <li><code>src</code>: contains the Python runtime for audio input, signal analysis, visual parameter mapping, and renderer orchestration.</li>
-        <li><code>config</code>: keeps tunable values outside the code so mapping constants, visual presets, and runtime settings can change without editing the engine.</li>
-        <li><code>shaders</code>: stores GLSL programs. The renderer sends normalized audio features as uniforms, and the shader turns those values into motion, color, and shape.</li>
-        <li><code>docs</code>: documents the pipeline and design notes so the project remains understandable as experiments accumulate.</li>
-        <li><code>tests</code>: protects deterministic feature extraction and mapping behavior, which is important because visual quality depends on stable signal interpretation.</li>
-      </ul>
-      <p>
-        The deterministic mapping layer is deliberately separate from rendering:
-        it can later be replaced by a learned or preset-based mapper while the
-        shader interface stays stable.
-      </p>
     </section>
   </article>
 
