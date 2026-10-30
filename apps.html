@@ -184,37 +184,6 @@
         <li>CI: GitHub Actions on macOS, with submodules, ccache, clang-format checks, CMake build, and CTest.</li>
       </ul>
     </section>
-    <div class="code-explainer">
-      <h4>Code snippet</h4>
-      <pre><code>void ScopeWaveformHistory::pushSamples(
-    const juce::AudioBuffer&lt;float&gt;&amp; buffer,
-    int numInputChannels)
-{
-    readWriteStatus.fetch_add(1, std::memory_order_acq_rel);
-    auto writePosition = scopeWritePosition.load(std::memory_order_relaxed);
-
-    for (auto sample = 0; sample &lt; buffer.getNumSamples(); ++sample)
-    {
-        for (auto channel = 0; channel &lt; channelsToStore; ++channel)
-        {
-            const auto storageIndex = channel * scopeSize + writePosition;
-            scopeSamples[storageIndex].store(
-                buffer.getSample(channel, sample),
-                std::memory_order_relaxed);
-        }
-
-        writePosition = (writePosition + 1) % scopeSize;
-    }
-
-    scopeWritePosition.store(writePosition, std::memory_order_release);
-    readWriteStatus.fetch_add(1, std::memory_order_release);
-}</code></pre>
-      <p>
-        The samples are stored in per-channel rings. The UI checks the
-        read/write status before and after copying; if the audio thread writes
-        during the copy, the UI discards that snapshot and tries again.
-      </p>
-    </div>
     <section class="architecture">
       <h4>Architecture</h4>
       <p>
