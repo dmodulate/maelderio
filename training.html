@@ -61,7 +61,8 @@
     <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="course-cpp-beginner" data-tab="course-cpp-beginner">C++ Debutant</button>
     <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="course-cpp-research" data-tab="course-cpp-research">C++ Research</button>
     <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="course-cmake" data-tab="course-cmake">CMake</button>
-    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="course-cuda-linux" data-tab="course-cuda-linux">CUDA</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="course-cuda-linux" data-tab="course-cuda-linux">CUDA C++</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="course-cuda-python" data-tab="course-cuda-python">CUDA Python</button>
     <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="course-patterns" data-tab="course-patterns">Design Patterns</button>
     <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="course-tableau" data-tab="course-tableau">Tableau R Python</button>
     <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="course-matlab-dl" data-tab="course-matlab-dl">MATLAB Deep Learning</button>
@@ -100,9 +101,15 @@
   </article>
 
   <article class="tab-panel training-panel" id="course-cuda-linux" role="tabpanel" hidden>
-    <h3>CUDA</h3>
-    <section class="course-block"><h4>Summary</h4><p>A CUDA course focused on GPU programming practice: runtime API, memory management, kernels, libraries, streams, synchronization, debugging, profiling, and performance optimization.</p></section>
+    <h3>CUDA C++</h3>
+    <section class="course-block"><h4>Summary</h4><p>A CUDA C++ course, given on Windows and on Linux, focused on GPU programming practice: runtime API, memory management, kernels, libraries, streams, synchronization, debugging, profiling, and performance optimization.</p></section>
     <section class="course-block"><h4>Course Structure</h4><div class="course-outline"><section><h5>Introduction and First Programs</h5><ul><li>What CUDA is</li><li>CUDA versus OpenCL and SYCL</li><li>Windows and Linux development environment setup</li><li>CUDA features and architecture overview</li><li>Compilation and execution</li><li>NVCC explanation</li></ul></section><section><h5>Runtime API and Language</h5><ul><li>Host-side CUDA API role</li><li>Device capability information</li><li>Synchronization</li><li>Memory allocation</li><li>Textures and surfaces</li><li>Error handling</li><li>Qualifiers, vector types, math types, memory barriers, atomics, and warp functions</li></ul></section><section><h5>Libraries and Synchronization</h5><ul><li>CUDA libraries overview</li><li>cuBLAS, cuFFT, cuRAND, and cuSPARSE</li><li>Cooperative groups</li><li>Asynchronous barriers</li><li>Concurrent asynchronous execution with streams and events</li><li>Dynamic parallelism</li></ul></section><section><h5>Debugging, Optimization, and Exercises</h5><ul><li>Common errors, debugging tools, and profiling</li><li>Global performance optimization strategy</li><li>Resource utilization, memory throughput, instruction throughput, and memory thrashing</li><li>OpenMP and OpenACC chapters</li><li>Exercise sets for runtime API, memory, textures/surfaces, libraries, streams/events, and optimization</li></ul></section></div></section>
+  </article>
+
+  <article class="tab-panel training-panel" id="course-cuda-python" role="tabpanel" hidden>
+    <h3>CUDA Python</h3>
+    <section class="course-block"><h4>Summary</h4><p>A CUDA Python course on running Python code in parallel on NVIDIA GPUs with the Numba compiler: writing and launching custom CUDA kernels, managing GPU memory, and converting CPU-based applications to GPU-accelerated ones.</p></section>
+    <section class="course-block"><h4>Course Structure</h4><div class="course-outline"><section><h5>Introduction and Setup</h5><ul><li>What GPU programming is, and why use CUDA with Python</li><li>Threads, blocks, and grids</li><li>GPU versus CPU design and the SIMT execution model</li><li>The CUDA programming model</li><li>Installing the CUDA Toolkit, drivers, Python, and Numba</li></ul></section><section><h5>Parallel Programming and Numba</h5><ul><li>Parallel execution and thread hierarchies</li><li>Warps and synchronization</li><li>Writing CUDA kernels with Numba and the @cuda.jit decorator</li><li>Writing and launching a basic kernel</li><li>Element-wise operations with threads</li><li>Configuring grid and block dimensions</li></ul></section><section><h5>Memory and Advanced Topics</h5><ul><li>GPU memory types: global, shared, local, and constant</li><li>Host-to-device transfers</li><li>Avoiding memory bottlenecks</li><li>Shared memory and synchronization</li><li>Asynchronous execution with streams</li><li>Multi-GPU basics</li></ul></section><section><h5>Porting and Troubleshooting</h5><ul><li>Profiling CPU code and finding parallelizable sections</li><li>Porting logic to CUDA kernels</li><li>Debugging CUDA applications, common errors, and fixes</li><li>Tools for testing and validation</li><li>GPU programming best practices</li></ul></section></div></section>
   </article>
 
   <article class="tab-panel training-panel" id="course-patterns" role="tabpanel" hidden>
