@@ -438,6 +438,10 @@ code {
   aspect-ratio: 12 / 7;
 }
 
+.video-embed-16x9 {
+  aspect-ratio: 16 / 9;
+}
+
 .video-embed video {
   display: block;
   height: 100%;
