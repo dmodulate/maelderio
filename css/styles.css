@@ -416,36 +416,14 @@ code {
 }
 
 .video-embed {
-  aspect-ratio: 16 / 10;
   background: #111;
   border: 1px solid #242424;
-  min-height: 180px;
   overflow: hidden;
-}
-
-.video-embed iframe {
-  border: 0;
-  display: block;
-  height: 100%;
-  width: 100%;
-}
-
-.video-embed-3x2 {
-  aspect-ratio: 3 / 2;
-}
-
-.video-embed-12x7 {
-  aspect-ratio: 12 / 7;
-}
-
-.video-embed-16x9 {
-  aspect-ratio: 16 / 9;
 }
 
 .video-embed video {
   display: block;
-  height: 100%;
-  object-fit: contain;
+  height: auto;
   width: 100%;
 }
 
