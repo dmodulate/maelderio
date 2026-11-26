@@ -29,7 +29,7 @@
   </div>
 
   <section class="download-panel">
-    <h3>Davai 0.9.3</h3>
+    <h3>Davai 0.9.7</h3>
     <ul class="download-list">
       <li><strong>macOS</strong> (VST3 + Audio Unit, Apple Silicon &amp; Intel)</li>
       <li>
@@ -39,11 +39,11 @@
       <li><strong>iPad</strong> (beta, via TestFlight)</li>
     </ul>
     <p class="download-action">
-      <a href="assets/downloads/303-synth/Davai-0.9.3.dmg" download>
-        Download Davai-0.9.3.dmg (macOS)
+      <a href="assets/downloads/303-synth/Davai-0.9.7.dmg" download>
+        Download Davai-0.9.7.dmg (macOS)
       </a>
-      <a href="assets/downloads/303-synth/Davai-0.9.3-Setup.exe" download>
-        Download Davai-0.9.3-Setup.exe (Windows)
+      <a href="assets/downloads/303-synth/Davai-0.9.7-Setup.exe" download>
+        Download Davai-0.9.7-Setup.exe (Windows)
       </a>
       <a href="https://testflight.apple.com/join/44zqHtqr" target="_blank" rel="noopener">
         Join the Davai TestFlight (iPad)
@@ -57,6 +57,93 @@
       Every change made to Davai, newest first. Each group is one update;
       click a change to read more about it.
     </p>
+      <article class="change-group">
+        <h4>Piano roll slide: Strict by default, Normal renamed Gap; ChillAcid preset</h4>
+        <p class="change-meta">25 Nov 2026</p>
+        <ul class="change-list">
+          <li><details><summary><span class="change-title">Piano roll: Strict slide and SLIDE on by default, Normal renamed Gap</span></summary><div class="change-body"><p>The piano roll's Slide setting now reads STRICT / GAP. Gap keeps the old Normal behaviour: a slide note after a silence glides and leaves the envelopes running, so it's only heard while the previous note's release is still ringing. Strict, now the default like the step sequencer, plays such a note as a fresh note. The SLIDE button now defaults to on. Every preset stores both settings, so existing presets sound the same.</p></div></details></li>
+          <li><details><summary><span class="change-title">Presets: add ChillAcid to Factory/Acid</span></summary><div class="change-body"><p>A new acid preset in the Acid folder.</p></div></details></li>
+        </ul>
+      </article>
+      <article class="change-group">
+        <h4>Filter: Comp and Nonlinear always on</h4>
+        <p class="change-meta">25 Nov 2026</p>
+        <ul class="change-list">
+          <li><details><summary><span class="change-title">Filter: hide the Diode Ladder's Comp and Nonlinear buttons</span></summary><div class="change-body"><p>Both are always on now: they default to on and every preset has them on. The buttons and their parameters stay in the code, so they can come back for tests or comparisons. With them hidden, the filter type menu takes the full width.</p></div></details></li>
+        </ul>
+      </article>
+      <article class="change-group">
+        <h4>Diode Ladder: one filter, documented; presets reorganised</h4>
+        <p class="change-meta">24 Nov 2026 · PR #192</p>
+        <ul class="change-list">
+          <li><details><summary><span class="change-title">Presets: remove seven Factory presets</span></summary><div class="change-body"><p>Glass Mobile, Glitch Stab, Metal Zap, Laser Talk, Offbeat Zaps, Laser Zap and Noise Zap.</p></div></details></li>
+          <li><details><summary><span class="change-title">Presets: the new folders move to Factory, Acid at the top level</span></summary><div class="change-body"><p>Psychedelic, Darkpsy, Forest, Squelch, Ambient and Trippy move from User to Factory, next to Atm, Bass and the rest, so the installers ship them. Acid moves up from Lead to the top level. Granuroll joins Factory/Lead, SubMassage and SubMassageRetrig Factory/Bass.</p></div></details></li>
+          <li><details><summary><span class="change-title">Diode Ladder: remove the original filter, name the saturation level</span></summary><div class="change-body"><p>The original Diode Ladder, with compensation in front of the resonance loop, is removed; the version that scales the level and compensates after the filter is now the only one. The feedback level is renamed from a "thermal voltage" to what it is: the level the feedback tanh bends at, Zavalishin's saturation level, 0.1 chosen from measurements.</p></div></details></li>
+          <li><details><summary><span class="change-title">Docs: Diode Ladder compensation and saturation level, summary rebuilt</span></summary><div class="change-body"><p>DiodeLadderCalculations.md describes compensation in one place with its two cases (exactly 1+k without the nonlinear feedback, a followed 1 + k*r with it) and explains the saturation level. DiodeLadderSummary.md is rebuilt to follow it, with block diagrams.</p></div></details></li>
+        </ul>
+      </article>
+      <article class="change-group">
+        <h4>v0.9.7: new presets, MIDI held-note stack, value boxes, note names</h4>
+        <p class="change-meta">24 Nov 2026 · v0.9.7 · PR #190</p>
+        <ul class="change-list">
+          <li><details><summary><span class="change-title">Acid presets for the new filter</span></summary><div class="change-body"><p>Eleven acid lines made for the current Diode Ladder (Env Mod in octaves, filter ATTACK on the normal notes), with funk rhythms - ghost scratches between the notes, accents on the off-beats - and LFO/Mod Envelope knob rides in the Auto ones. They replace the old acid set.</p></div></details></li>
+          <li><details><summary><span class="change-title">New presets: psychedelic, darkpsy, forest, squelch, ambient and more</span></summary><div class="change-body"><p>108 presets in folders by style and subfolders by kind: Psychedelic (zaps, zap lines, atmospheres, leads, FX), Darkpsy and Forest (textures, FX, leads), Squelch (leads, FX, textures, using the FX filters' band pass), Trippy (sounds, textures, FX) and Ambient (pads, chimes, bells, singing bowls, sequences). Each has its own mix, with levels balanced by rendering.</p></div></details></li>
+          <li><details><summary><span class="change-title">MIDI input: overlapping notes release correctly</span></summary><div class="change-body"><p>Only the newest held note was tracked: releasing it while an earlier key was still down released the voice, and that key's own note-off then did nothing. Davai now keeps a stack of held keys: releasing the sounding key goes back, legato, to the most recent one still held, and only the last key up releases the voice or hands it back to the sequencer.</p></div></details></li>
+          <li><details><summary><span class="change-title">Show the value box under every knob while it's turned</span></summary><div class="change-body"><p>The value box is now shown for every knob, not just some. The piano roll's arp knobs don't need it, since their value is always shown beside them; LFO Rate keeps its own readout.</p></div></details></li>
+          <li><details><summary><span class="change-title">Note names: middle C is C3 everywhere</span></summary><div class="change-body"><p>The on-screen keyboard called MIDI note 60 "C3" while the piano roll and step roll called it "C4". All three now use middle C = C3. Only the names change - every note plays the same pitch.</p></div></details></li>
+          <li><details><summary><span class="change-title">Docs: a block diagram of the Diode Ladder</span></summary><div class="change-body"><p>A new first chapter with a block diagram of the whole filter and of one stage, using the document's own signal names, and where each loop is solved.</p></div></details></li>
+        </ul>
+      </article>
+      <article class="change-group">
+        <h4>v0.9.6: older presets and sessions converted on load</h4>
+        <p class="change-meta">24 Nov 2026 · v0.9.6 · PR #189</p>
+        <ul class="change-list">
+          <li><details><summary><span class="change-title">Convert presets and sessions from older versions on load</span></summary><div class="change-body"><p>A preset or DAW session saved by an older version is brought up to the current format as it loads: its modulation routings become matrix slots (keeping amount, bipolar, bypass and morph), and an Env Mod saved in Hz becomes the octaves it swept from that state's own cutoff.</p><p>A converted User preset is rewritten in the new format, keeping the original beside it as "&lt;name&gt;.old"; read-only Factory presets are converted in memory instead.</p></div></details></li>
+          <li><details><summary><span class="change-title">Docs: a one-page summary of the Diode Ladder</span></summary><div class="change-body"><p>What the Diode Ladder does today - the stages, the coupled ladder, the resonance loop, drive, compensation, cutoff in octaves, smoothing and oversampling - pointing to DiodeLadderCalculations.md for the derivations.</p></div></details></li>
+        </ul>
+      </article>
+      <article class="change-group">
+        <h4>v0.9.5: modulation matrix slots, LFO 4-6, Mod Env 2-3</h4>
+        <p class="change-meta">24 Nov 2026 · v0.9.5 · PR #188</p>
+        <ul class="change-list">
+          <li><details><summary><span class="change-title">Modulation matrix slots, LFO 4-6, Mod Env 2-3</span></summary><div class="change-body"><p>Modulation used a set of parameters for every source/target pair, 3,332 in all, which more LFOs and Mod Envelopes would have doubled. It's now a matrix of 64 slots, each routing one source to one target with its own amount, bipolar, bypass and morph: 734 parameters, a 34 KB state instead of 165 KB, and a little less CPU.</p><p>Sources are LFO 1-6 (each with its Lorenz Y), Mod Env 1-3 and Velocity. The tabs read LFO 1-6 | MATRIX and AMP ENVELOPE | MOD ENV 1-3 | VELO. Routing is done in the Matrix (one row per slot) and by drag-to-modulate; each knob shows one ring per slot. A new instance still routes Velocity to Volume.</p></div></details></li>
+          <li><details><summary><span class="change-title">Presets: routings as modulation slots</span></summary><div class="change-body"><p>Every preset's switched-on routings are converted to slots in the old order (LFOs, then the Mod Envelope, then Velocity), keeping their settings.</p></div></details></li>
+        </ul>
+      </article>
+      <article class="change-group">
+        <h4>v0.9.4: filter envelope ATTACK knob</h4>
+        <p class="change-meta">24 Nov 2026 · v0.9.4 · PR #185</p>
+        <ul class="change-list">
+          <li><details><summary><span class="change-title">Filter envelope: an ATTACK knob for normal notes</span></summary><div class="change-body"><p>The filter envelope's attack was fixed at the stock TB-303's 4 ms. ATTACK now sets it for normal notes, from 0 to 2 s (30 ms at the knob's centre, so the Devil Fish's Soft Attack range takes its first half and longer acidcore swells the second), 4 ms by default so existing presets sound the same. Accented notes keep 4 ms, like the Devil Fish. It's a modulation target, like Decay and Env Mod.</p></div></details></li>
+        </ul>
+      </article>
+      <article class="change-group">
+        <h4>Smooth parameters per sample; EQ and Delay fixes</h4>
+        <p class="change-meta">24 Nov 2026 · PR #183</p>
+        <ul class="change-list">
+          <li><details><summary><span class="change-title">Smooth the other continuous parameters per sample</span></summary><div class="change-body"><p>Levels and pans, Drive, the accent amount, Saturation and Distortion, Delay mix and feedback, Compressor makeup, the FX filters and the EQ were read once per block and jumped there, so a knob, automation or a modulation step could click. Each now glides to its new value over 10 ms, like cutoff and resonance. Delay time isn't smoothed: a gliding delay time bends the echoes' pitch.</p></div></details></li>
+          <li><details><summary><span class="change-title">EQ: filter the right channel too</span></summary><div class="change-body"><p>Each EQ band only filtered the left channel; the right one passed through unchanged (a 2 kHz high-pass left the right side 27 dB louder). Each band now filters both channels.</p></div></details></li>
+          <li><details><summary><span class="change-title">Delay: apply the Width knob again</span></summary><div class="change-body"><p>Since the Delay panel rework, Width stayed at 100% whatever the knob said. It's applied again, and smoothed like the delay's mix and feedback.</p></div></details></li>
+        </ul>
+      </article>
+      <article class="change-group">
+        <h4>Diode Ladder: nonlinear feedback, compensation, Env Mod in octaves</h4>
+        <p class="change-meta">23 Nov 2026 · PR #177</p>
+        <ul class="change-list">
+          <li><details><summary><span class="change-title">Filter envelope and accent: sweep the cutoff in octaves</span></summary><div class="change-body"><p>They were added to the cutoff in Hz, so the same Env Mod swept 300 Hz by 3.5 octaves and 5000 Hz by less than one: the squelch faded as the cutoff went up. Like a TB-303's exponential control voltage, they now multiply the cutoff, and Env Mod is set in octaves (0 to 6). Filter FM and Osc Filter Mod stay in Hz. Every preset's Env Mod was converted so each sweep's lowest and highest points stay where they were.</p></div></details></li>
+          <li><details><summary><span class="change-title">Diode Ladder: nonlinear feedback at a set level, compensation after the filter</span></summary><div class="change-body"><p>The nonlinear feedback only bent once compensation had boosted the input, so the NONLINEAR switch did nothing with COMP off and crushed the resonance with COMP on. The filter now saturates at a fixed level of real signal and applies compensation to its output instead.</p></div></details></li>
+          <li><details><summary><span class="change-title">Diode Ladder: compensate the loop's actual loss</span></summary><div class="change-body"><p>Once the loop saturates it loses less, and the fixed compensation pushed the level above the input's: SubMassage came out 6 dB louder and clipped. Compensation now follows the loop's actual loss, like a compressor's gain, staying within about 1 dB of the linear filter's level.</p></div></details></li>
+          <li><details><summary><span class="change-title">Smooth cutoff, resonance and compensation per sample</span></summary><div class="change-body"><p>All three jumped once per block, and a resonance change could click on the Diode Ladder. They now glide over 10 ms, including switching COMP.</p></div></details></li>
+        </ul>
+      </article>
+      <article class="change-group">
+        <h4>Acid lead presets; swung piano roll notes on time</h4>
+        <p class="change-meta">23 Nov 2026 · PR #174</p>
+        <ul class="change-list">
+          <li><details><summary><span class="change-title">Piano roll: start swung notes at their exact position</span></summary><div class="change-body"><p>A note starting between two grid units (a swung off-beat, or a note placed with snap off) only sounded from the next unit on - late - or, when another note started there, not at all. Notes now start at their exact sample, and a note that just touches the next one no longer turns into legato by a one-sample rounding error.</p></div></details></li>
+          <li><details><summary><span class="change-title">Acid lead presets</span></summary><div class="change-body"><p>28 piano roll acid lines, four per style - Classic 303, Acid House, Acid Techno, Acid Tekno, Acidcore, Tribecore, Darkpsy - two with slides and accents and two without, at each style's tempo and swing.</p></div></details></li>
+        </ul>
+      </article>
       <article class="change-group">
         <h4>v0.9.3: Matrix tab, preset author and info, factory presets by category</h4>
         <p class="change-meta">18 Nov 2026 · v0.9.3</p>
